@@ -15,7 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { ClosetComponent } from './closet/closet.component';
 import { HamperComponent } from './hamper/hamper.component';
 
-// jin@email.com's credentials
+// firebase credentials
 var config = {
   production: false,
   apiKey: "AIzaSyAkG4QmO8X_pWBBw4tQv6z_ad-3-Z_tKyc",
