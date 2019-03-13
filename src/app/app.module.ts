@@ -20,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ClosetComponent } from './closet/closet.component';
 import { HamperComponent } from './hamper/hamper.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 var config = {
   apiKey: "AIzaSyAkG4QmO8X_pWBBw4tQv6z_ad-3-Z_tKyc",
@@ -40,15 +41,16 @@ var config = {
     HeaderComponent,
     HomeComponent,
     ClosetComponent,
-    HamperComponent
+    HamperComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
-    ClosetModule
+    ClosetModule,
+    AppRoutingModule
   ],
   providers: [
     AuthService
