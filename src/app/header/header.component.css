@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300|Roboto');
+
+.navbar {
+    background-color: #7807d4;
+    font-family: 'Helvetica';
+    color: white;
+}
+
+.navbar-brand{
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1.3em;
+    text-transform: uppercase;
+}
+
+a {
+    font-size: 1em;
+    color: white;
+    cursor: pointer;
+}
