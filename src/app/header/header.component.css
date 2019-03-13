@@ -15,6 +15,10 @@
 
 a {
     font-size: 1em;
-    color: white;
+    color: #dcc8ec;
     cursor: pointer;
+}
+
+li > a:hover {
+    color: white;
 }
