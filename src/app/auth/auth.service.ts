@@ -25,13 +25,24 @@ export class AuthService {
 
   async login(form: FormGroup) {
     try {
-        await  this.afAuth.auth.signInWithEmailAndPassword(form.get('email').value, form.get('password').value);
+        await this.afAuth.auth.signInWithEmailAndPassword(form.get('email').value, form.get('password').value);
         this.router.navigate(['closet/list']);
     } catch (e) {
         alert("Error!"  +  e.message);
     }
 
     console.log(form.value);
+  }
+
+  async register(form: FormGroup) {
+    var result;
+
+    try {
+      result = await this.afAuth.auth.createUserWithEmailAndPassword(form.get('email').value, form.get('password').value);
+      this.router.navigate(['closet/list']);
+    } catch (e) {
+        alert("Error!"  +  e.message);
+    }
   }
 
   async logout(){
