@@ -5,6 +5,13 @@ import { auth } from  'firebase/app';
 import { AngularFireAuth } from  "@angular/fire/auth";
 import { User } from  'firebase';
 
+import * as firebase from 'firebase';
+
+declare global {
+  const firebase
+}
+export {};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +27,7 @@ export class AuthService {
       } else {
         localStorage.setItem('user', null);
       }
-    })
+    });
   }
 
   async login(form: FormGroup) {
@@ -38,7 +45,24 @@ export class AuthService {
     var result;
 
     try {
-      result = await this.afAuth.auth.createUserWithEmailAndPassword(form.get('email').value, form.get('password').value);
+      result = await this.afAuth.auth.createUserWithEmailAndPassword(form.get('email').value, form.get('password').value)
+      .then ( success=> {
+        // For debugging purposes.
+        // console.log("current user before: " + JSON.stringify(firebase.auth().currentUser));
+        firebase.auth().currentUser.updateProfile({
+          displayName: form.get('username').value,
+        }).then(function() {
+          // Update successful.
+          console.log("Update user name successful");
+          // For debugging purposes.
+          // console.log("display name: " + firebase.auth().currentUser.displayName);
+        }).catch(function(error) {
+          // An error happened.
+          console.log("ERROR: Was unable to update user name");
+          console.log(error);
+        });
+      })
+
       this.router.navigate(['closet/list']);
     } catch (e) {
         alert("Error!"  +  e.message);

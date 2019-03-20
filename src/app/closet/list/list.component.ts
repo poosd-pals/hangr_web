@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+  longText: boolean;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() { 
+    this.longText = false;
   }
 
+  ngOnInit() { }
 }
