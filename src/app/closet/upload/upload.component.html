@@ -1,0 +1,63 @@
+<h1>Add New Clothing</h1>
+
+<div class="card content">
+  <form [formGroup]="clothingForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-5 photo">
+        <i class="fa fa-plus-square-o fa-5x" aria-hidden="true"></i>
+      </div>
+      <div class="col-md">
+        <div class="row">
+          <label>
+            Name:
+            <br>
+            <input type="text" formControlName="name" required>
+          </label>
+        </div>
+        <div class="row">
+            <label>
+                Category:
+                <br>
+                <input type="text" formControlName="category">
+            </label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row longRow">
+        <label>
+            Wears Before Wash:
+            <br>
+            <input type="text" formControlName="wearsBeforeWash">
+          </label>
+    </div>
+    
+    <div class="row longRow">
+        <label>
+            Colors:
+            <br>
+            <input type="text" formControlName="colors">
+          </label>
+    </div>
+
+    <div class="row longRow">
+        <label>
+            Tags:
+            <br>
+            <input type="text" formControlName="tags">
+          </label>
+    </div>
+    
+  </form>
+
+  <div class="row longRow">
+      <button type="submit" class="btn btn-info" [disabled]="!clothingForm.valid">Submit</button>
+  </div>
+
+</div>
+
+<p>
+    Form Value: {{ clothingForm.value | json }}
+</p>
+
+
