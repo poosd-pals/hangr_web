@@ -1,0 +1,48 @@
+/* Navbar is 57 px */
+/* #about-hero {
+    max-width: 100%;
+    height: auto;
+} */
+
+.about-hero {
+    max-width: 100%;
+}
+
+.about-text {
+    position: absolute;
+    width: 530px;
+    height: 169px;
+    top: 1350px;
+    left: 725px;
+}
+
+.about-right-img{
+    position: absolute;
+    top: 1670px;
+    left: 1220px;
+}
+
+.about-left-img{
+    position: absolute;
+    top: 2240px;
+    left: 400px;
+}
+
+.about-banner{
+    position: absolute;
+    top: 2810px;
+    left: 0px;
+}
+.small-text{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.break{
+    width: 1000px;
+    height: 100px;
+    position: absolute;
+    top: 3700px;
+}
+{
+    outline: 1px solid red;
+   } 

@@ -1,25 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700i|Source+Sans+Pro:400,400i,700');
+@import url('https://fonts.googleapis.com/css?family=Karla');
 
 /* Master Styles */
-h1 {
+h1 
+{
     font-family: Helvetica, sans-serif;
     font-size: 230%;
-  }
-  h2, h3 {
+}
+h2, h3 
+{
     color: #444;
     font-family: Helvetica, sans-serif;
     font-weight: lighter;
-  }
-
-  body, input[text], button {
+}
+body, input[text], button 
+{
     font-family: Helvetica, sans-serif;
-  }
-  a {
+}
+a 
+{
     cursor: pointer;
     cursor: hand;
-  }
-  button {
+}
+button 
+{
     font-family: Arial;
     background-color: #eee;
     border: none;
@@ -27,19 +33,26 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     cursor: hand;
-  }
-  button:hover {
+}
+button:hover 
+{
     background-color: #cfd8dc;
-  }
-  button:disabled {
+}
+button:disabled
+{
     background-color: #eee;
     color: #aaa;
     cursor: auto;
-  }
+}
+body 
+{
+	background-color: #ededed;
+}
   
-  /* Navigation link styles */
+/* Navigation link styles */
   
-  /* everywhere else */
-  * {
+/* everywhere else */
+* 
+{
     font-family: Arial, Helvetica, sans-serif;
-  }
+}

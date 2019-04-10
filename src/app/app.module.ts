@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { ClosetComponent } from './closet/closet.component';
 import { HamperComponent } from './hamper/hamper.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { AboutComponent } from './about/about.component';
 
 var config = {
   apiKey: "AIzaSyAkG4QmO8X_pWBBw4tQv6z_ad-3-Z_tKyc",
@@ -42,7 +43,8 @@ var config = {
     HomeComponent,
     ClosetComponent,
     HamperComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
