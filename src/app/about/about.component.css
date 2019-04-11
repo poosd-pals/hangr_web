@@ -23,10 +23,24 @@
     left: 70%;
 }
 
+.about-caption-right{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 100%;
+}
+
 .about-left-img{
     position: relative;
     top: 700px;
     left: 0%;
+}
+
+.about-caption-left{
+    position: absolute;
+    top: 40%;
+    right: 50%;
+    width: 100%;
 }
 
 .about-banner{
@@ -34,7 +48,9 @@
 }
 
 .small-text{
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Karla', sans-serif;
+    font-weight: bold;
+    text-align: center;
 }
 
 .break{
@@ -42,6 +58,6 @@
     height: 100px;
 } 
 
-/**{
+/* *{
     outline: 1px solid red;
    } */
