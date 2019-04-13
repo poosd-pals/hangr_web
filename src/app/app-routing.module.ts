@@ -30,7 +30,7 @@ const routes: Routes = [
     },
     { 
       path: '',   
-      redirectTo: '/closet', 
+      redirectTo: '/closet/list', 
       pathMatch: 'full' 
     },
     {

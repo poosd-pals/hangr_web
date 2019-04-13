@@ -47,7 +47,10 @@ body
 {
 	background-color: #ededed;
 }
-  
+.error{
+    font-family: Helvetica;
+    color: red;
+}
 /* Navigation link styles */
   
 /* everywhere else */
