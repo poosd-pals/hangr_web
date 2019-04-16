@@ -7,19 +7,25 @@ import { ApiService } from './../../api/api.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
+
 export class ListComponent implements OnInit {
   // long text is the "add clothing" text when the button is expanded.
-  addButtonLongText: boolean;
-  clothing: Object;
+    addButtonLongText: boolean;
+    clothing: Object;
 
-  constructor(private api: ApiService) { 
-    this.addButtonLongText = false;
-  }
+    closet: any[] = [];
 
-  ngOnInit() { 
+    constructor(private api: ApiService) {
+        this.addButtonLongText = false;
+        this.closet = this.api.getClothing();
+    }
+
+    ngOnInit() {}
+
+/*   ngOnInit() { 
     this.api.getClothing().subscribe(clothing => {
         this.clothing = clothing;
         console.log(this.clothing);
     })
-  }
+  } */
 }

@@ -9,11 +9,29 @@ import { Observable } from 'rxjs';
 })
 
 export class ApiService {
+
   apiURL: string = 'http://localhost:3000/closet/upload/api/';
 
   constructor(private http: HttpClient) {
 
   }
+
+    clothingList = [];
+
+    CLOSET = [
+        {name: 'White Shirt', category: 'Shirt', wearsBeforeWash: 10, colors: 'White', tags: 'blah',
+            url: 'assets/tempImg/whiteshirt.jpg'},
+        {name: 'Blue Dress', category: 'Dress', wearsBeforeWash: 10, colors: 'Blue', tags: 'blah',
+            url: 'assets/tempImg/bluedress.jpg'},
+        {name: 'Pink Shirt', category: 'Shirt', wearsBeforeWash: 10, colors: 'Pink', tags: 'blah',
+            url: 'assets/tempImg/pinkshirt.jpg'},
+        {name: 'White Shirt', category: 'Shirt', wearsBeforeWash: 10, colors: 'White', tags: 'blah',
+            url: 'assets/tempImg/whiteshirt.jpg'},
+        {name: 'Blue Dress', category: 'Dress', wearsBeforeWash: 10, colors: 'Blue', tags: 'blah',
+            url: 'assets/tempImg//bluedress.jpg'},
+        {name: 'Pink Shirt', category: 'Shirt', wearsBeforeWash: 10, colors: 'Pink', tags: 'blah',
+            url: 'assets/tempImg/pinkshirt.jpg'}
+    ];
 
   addClothing (clothingForm: FormGroup){
     // TODO: change URL
@@ -32,10 +50,14 @@ export class ApiService {
     )
   }
 
-  getClothing(){
+    getClothing() {
+        return this.clothingList = this.CLOSET.slice(0);
+    }
+
+/*   getClothing(){
     // TODO: change this
     return this.http.get('https://my-json-server.typicode.com/winterchocolatte/demo/clothings');
-  }
+  } */
 
 
 }

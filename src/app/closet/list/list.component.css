@@ -84,3 +84,4 @@
     font-size: 20px;                          /*Text size, cannot be defined initially without moving the scrollbar*/
     width: auto;                              /*Required to be set with a delay (see animation) to not have scrollbar. Delay is to wait container to size up*/
 }
+
