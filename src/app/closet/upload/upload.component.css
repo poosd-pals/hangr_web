@@ -53,3 +53,20 @@ label {
       padding-right: 5%;
       margin-bottom: 2%;
   }
+
+  .fileButton {
+    width: 80%;
+   background-color: white; 
+  }
+
+  img {
+    width: 100%;
+  }
+
+  img:hover{
+    opacity: 0.8;
+  }
+
+  .nameAndCategory {
+    padding-top: 1%;
+  }

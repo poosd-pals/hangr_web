@@ -4,9 +4,13 @@
   <form [formGroup]="clothingForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-md-5 photo">
-        <i class="fa fa-plus-square-o fa-5x" aria-hidden="true"></i>
+      <button class="fileButton" type="button" (click)="clothingImageUpload.click()">
+        <img [src]="imgUrl">
+      </button>
+        <input type="file" #clothingImageUpload (change)="updateImage($event)" style="display: none;" />
+        
       </div>
-      <div class="col-md">
+      <div class="col-md nameAndCategory">
         <div class="row">
           <label>
             Name:

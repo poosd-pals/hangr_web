@@ -54,6 +54,7 @@ export class ApiService {
         return this.clothingList = this.CLOSET.slice(0);
     }
 
+    // Jin
 /*   getClothing(){
     // TODO: change this
     return this.http.get('https://my-json-server.typicode.com/winterchocolatte/demo/clothings');

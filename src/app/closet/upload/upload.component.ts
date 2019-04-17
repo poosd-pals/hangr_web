@@ -15,6 +15,8 @@ export class UploadComponent implements OnInit {
   submitted = false;
   success = false;
 
+  imgUrl: String = "../../../assets/image-upload-icon.png";
+
   constructor(private api: ApiService, private fb: FormBuilder) { 
     this.clothingForm = this.fb.group({
       name: ['', Validators.required],
@@ -26,6 +28,16 @@ export class UploadComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  updateImage(Event:any){
+    if ((<HTMLInputElement>event.target).files && (<HTMLInputElement>event.target).files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+          this.imgUrl = event.target.result;
+      }
+      reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+  }
   }
 
   onSubmit() {
