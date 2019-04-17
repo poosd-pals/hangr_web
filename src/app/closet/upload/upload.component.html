@@ -4,14 +4,21 @@
   <form [formGroup]="clothingForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-md-5 photo">
-        <i class="fa fa-plus-square-o fa-5x" aria-hidden="true"></i>
+      <button class="fileButton" type="button" (click)="clothingImageUpload.click()">
+        <img [src]="imgUrl">
+      </button>
+        <input type="file" #clothingImageUpload (change)="updateImage($event)" style="display: none;" />
+        
       </div>
-      <div class="col-md">
+      <div class="col-md nameAndCategory">
         <div class="row">
           <label>
             Name:
             <br>
-            <input type="text" formControlName="name" required>
+            <input type="text" formControlName="name">
+            <div *ngIf="submitted && clothingForm.controls.name.errors" class="error">
+              <div *ngIf="clothingForm.controls.name.errors.required">Clothing name is required</div>
+            </div>
           </label>
         </div>
         <div class="row">
@@ -19,6 +26,9 @@
                 Category:
                 <br>
                 <input type="text" formControlName="category">
+                <div *ngIf="submitted && clothingForm.controls.category.errors" class="error">
+                  <div *ngIf="clothingForm.controls.category.errors.required">Category is required</div>
+                </div>
             </label>
         </div>
       </div>
@@ -29,6 +39,10 @@
             Wears Before Wash:
             <br>
             <input type="text" formControlName="wearsBeforeWash">
+            <div *ngIf="submitted && clothingForm.controls.wearsBeforeWash.errors" class="error">
+              <div *ngIf="clothingForm.controls.wearsBeforeWash.errors.required">Wears before wash is required</div>
+            </div>
+
           </label>
     </div>
     
@@ -37,6 +51,9 @@
             Colors:
             <br>
             <input type="text" formControlName="colors">
+            <div *ngIf="submitted && clothingForm.controls.colors.errors" class="error">
+              <div *ngIf="clothingForm.controls.colors.errors.required">Color is required</div>
+            </div>
           </label>
     </div>
 
@@ -47,12 +64,11 @@
             <input type="text" formControlName="tags">
           </label>
     </div>
-    
-  </form>
 
-  <div class="row longRow">
-      <button type="submit" class="btn btn-info" [disabled]="!clothingForm.valid">Submit</button>
-  </div>
+    <div class="row longRow">
+      <button type="submit" class="btn btn-info">Submit</button>
+    </div>
+  </form>
 
 </div>
 

@@ -7,6 +7,7 @@ import { HamperComponent } from  './hamper/hamper.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { AboutComponent } from './about/about.component';
 
 import { ListComponent } from './closet/list/list.component';
 import { UploadComponent } from './closet/upload/upload.component';
@@ -29,12 +30,17 @@ const routes: Routes = [
     },
     { 
       path: '',   
-      redirectTo: '/closet', 
+      redirectTo: '/closet/list', 
       pathMatch: 'full' 
     },
     {
     path:  'hamper',
     component:  HamperComponent,
+    canActivate: [AuthGuard]
+    },
+    {
+    path:  'about',
+    component:  AboutComponent,
     canActivate: [AuthGuard]
     },
     { 
@@ -44,7 +50,7 @@ const routes: Routes = [
     },
     { 
       path: '**', 
-      component: PagenotfoundComponent 
+      component: PagenotfoundComponent
     }
 ];
 

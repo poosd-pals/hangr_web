@@ -40,6 +40,7 @@ router.get('/saveClothing', function(req, res) {
     if (req.docRef !== null) {
         req.docRef.get().then(function(doc) {
             if (doc.exists) {
+                console.log(doc);
                 console.log("Document data:", doc.data());
                 clothingItem = doc;
                 if (req.imgUri === doc.imgUri)
@@ -72,6 +73,7 @@ router.get('/saveClothing', function(req, res) {
     if (saveNewImg) {
         imageRef.put(req.imgName).then(function(snapshot) {
             console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+            console.log(snapshot);
             imageRef.getDownloadURL().then(function(url) {
                 imageUri = url;
             })
@@ -97,6 +99,7 @@ router.get('/saveClothing', function(req, res) {
         })
         .then(function(docRef) {
             console.log("Document modified with ID: ", docRef.id);
+            console.log(docRef);
             res.send(docRef);
         })
         .catch(function(error) {

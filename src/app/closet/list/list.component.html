@@ -1,3 +1,18 @@
+<div class ="row"><div class="card-deck">
+        <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let item of closet">
+            <div class="card mx-auto text-center" >
+                <img class="card-img-top" src="{{ item. url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.category }}</p>
+                    <p class="card-text float-right text-muted">Edit</p>
+                </div>
+            </div>
+        </div>
+</div></div>
+
+
+<!-- 
 <div class="card-deck">
   <div class="card">
     <img class="card-img-top" src="https://img.shein.com/images/shein.com/201606/1466821525857227182_im_600x799.jpg" alt="Card image cap">
@@ -31,6 +46,16 @@
         <p class="card-text float-right text-muted">Edit</p>
     </div>
   </div>
+  <div class="card">
+    <img class="card-img-top" src="https://img.shein.com/images/shein.com/201606/1466821525857227182_im_600x799.jpg" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text float-right text-muted">Edit</p>
+    </div>
+  </div>
+ -->
+
 <div class="container-btn-add">
   <button type="button" class="btn btn-primary btn-add">
     <span class="plus-sym">+</span>

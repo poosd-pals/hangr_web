@@ -39,7 +39,7 @@ label {
   }
 
   .photo {
-      padding-top: 2%;
+      padding-top: 3%;
       padding-left: 8%;
       padding-right: 0%;
   }
@@ -52,4 +52,21 @@ label {
       width: 50%;
       padding-right: 5%;
       margin-bottom: 2%;
+  }
+
+  .fileButton {
+    width: 80%;
+   background-color: white; 
+  }
+
+  img {
+    width: 100%;
+  }
+
+  img:hover{
+    opacity: 0.8;
+  }
+
+  .nameAndCategory {
+    padding-top: 1%;
   }

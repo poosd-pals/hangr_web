@@ -1,0 +1,63 @@
+/* Navbar is 57 px */
+/* #about-hero {
+    max-width: 100%;
+    height: auto;
+} */
+
+.about-hero {
+    max-width: 100%;
+}
+
+.about-welcome {
+    position: absolute;
+    max-width: 100%;
+    top: 1100px;
+}
+
+.about-images {
+    top: 1400px;
+}
+.about-right-img{
+    position: relative;
+    top: 300px;
+    left: 70%;
+}
+
+.about-caption-right{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 100%;
+}
+
+.about-left-img{
+    position: relative;
+    top: 700px;
+    left: 0%;
+}
+
+.about-caption-left{
+    position: absolute;
+    top: 40%;
+    right: 50%;
+    width: 100%;
+}
+
+.about-banner{
+    max-width: 80%;
+}
+
+.small-text{
+    font-family: 'Karla', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+.break{
+    width: 1000px;
+    height: 100px;
+} 
+
+/* *{
+    outline: 1px solid red;
+   } */
