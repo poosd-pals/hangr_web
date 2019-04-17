@@ -2,6 +2,8 @@ import { Clothing } from './../clothing';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../../api/api.service';
 
+import { VERSION } from '@angular/material';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -10,6 +12,8 @@ import { ApiService } from './../../api/api.service';
 
 export class ListComponent implements OnInit {
   // long text is the "add clothing" text when the button is expanded.
+
+  version = VERSION;
     addButtonLongText: boolean;
     clothing: Object;
 
@@ -21,6 +25,8 @@ export class ListComponent implements OnInit {
     }
 
     ngOnInit() {}
+
+    
 
 /*   ngOnInit() { 
     this.api.getClothing().subscribe(clothing => {
