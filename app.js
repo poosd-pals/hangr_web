@@ -21,6 +21,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+	resave: false,
+	saveUninitialized: false,
+	secret: "secret!",
+	key: "",
+	hasError: false,
+	errorMessage: "",
+	hasRegisterSuccess: false,
+	uid: "",
+	displayName: ""
+}));
 
 app.use('/', indexRouter);
 app.use('/register', registerRouter);

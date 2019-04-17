@@ -14,7 +14,7 @@ var db = firebase.firestore();
 router.get('/assembleOutfit', function(req, res) {
     var error = false;
     req.clothingItems.map((clothingRefId) => {
-        var clothingRef = db.collection(req.uid).doc(clothingRefId);
+        var clothingRef = db.collection(req.session.uid).doc(clothingRefId);
 
         clothingRef.update({
             wearsLeft: (doc.data().wearsLeft === -1 ? -1 : doc.data().wearsLeft - 1)
@@ -35,7 +35,7 @@ router.get('/assembleOutfit', function(req, res) {
 });
 
 router.get('/getCleanClothes', function(req, res) {
-    db.collection(req.uid).where('wearsLeft', '!=', 0).get()
+    db.collection(req.session.uid).where('wearsLeft', '!=', 0).get()
     .then(function(querySnapshot) {
         res.json('clothingItems', querySnapshot.docs);
         res.send(querySnapshot.docs);

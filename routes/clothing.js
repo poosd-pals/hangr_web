@@ -66,7 +66,7 @@ router.get('/saveClothing', function(req, res) {
     //         console.log("Data stored in Firestore!");
     //     });
 
-    imageRef = storageRef.child(req.uid).child(req.imgUri);
+    imageRef = storageRef.child(req.session.uid).child(req.imgUri);
     var imageUri = '';
 
     if (saveNewImg) {
@@ -90,8 +90,9 @@ router.get('/saveClothing', function(req, res) {
             category: req.category,
             colors: req.colors,
             tags: req.tags,
-            imgUri: imageUri,
-            wearsTotal: req.wearsTotal,
+            imgUrl: imageUri,
+            imgFilename: req.fileName,
+            wearsBeforeWash: req.wearsTotal,
             wearsLeft: req.wearsTotal
         })
         .then(function(docRef) {
@@ -104,12 +105,13 @@ router.get('/saveClothing', function(req, res) {
         });
     }
     else {
-        db.collection(req.uid).add({
+        db.collection(req.session.uid).add({
             name: req.name,
             category: req.category,
             colors: req.colors,
             tags: req.tags,
             imgUri: imageUri,
+            imgFilename: req.fileName,
             wearsTotal: req.wearsTotal ? req.wearsTotal : -1,
             wearsLeft: req.wearsTotal ? req.wearsTotal : -1
         })

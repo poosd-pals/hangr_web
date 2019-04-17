@@ -12,7 +12,7 @@ var db = firebase.firestore();
 
 // Processes array of document reference ids
 router.get('/getHamper', function(req, res) {
-    db.collection(req.uid).where('wearsLeft', '==', 0).get()
+    db.collection(req.session.uid).where('wearsLeft', '==', 0).get()
     .then(function(querySnapshot) {
         res.send(querySnapshot.docs);
         // querySnapshot.forEach(function(doc) {
@@ -31,7 +31,7 @@ router.get('/emptyHamper', function(req, res) {
     var error = false;
 
     req.clothingItems.map((clothingRefId) => {
-        var clothingRef = db.collection(req.uid).doc(clothingRefId);
+        var clothingRef = db.collection(req.session.uid).doc(clothingRefId);
 
         clothingRef.update({
             wearsLeft: doc.data().wearsTotal
