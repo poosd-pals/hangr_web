@@ -3,12 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var registerRouter = require('./routes/register');
-var clothingRouter = require('./routes/clothing');
-var outfitsRouter = require('./routes/outfits');
-var hamperRouter = require('./routes/hamper');
+var indexRouter = require('./routes/index.js');
+var registerRouter = require('./routes/register.js');
+var clothingRouter = require('./routes/clothing.js');
+var outfitsRouter = require('./routes/outfits.js');
+var hamperRouter = require('./routes/hamper.js');
 
 var app = express();
 

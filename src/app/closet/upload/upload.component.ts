@@ -49,7 +49,7 @@ export class UploadComponent implements OnInit {
 
     console.log(this.clothingForm);
 
-    this.api.addClothing(this.clothingForm);
+    this.api.saveClothing(this.clothingForm);
 
     this.success = true;
 

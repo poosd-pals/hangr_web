@@ -10,7 +10,7 @@ firebase.initializeApp(config);
 var db = firebase.firestore();
 // var currentUser = firebase.auth().currentUser;
 
-router.get('/getClothing', function(req, res) {
+router.post('/getClothing', function(req, res) {
     req.docRef.get().then(function(doc) {
         if (doc.exists) {
             console.log("Document data:", doc.data());
@@ -31,7 +31,7 @@ router.get('/getClothing', function(req, res) {
     
 // });
 
-router.get('/saveClothing', function(req, res) {
+router.post('/saveClothing', function(req, res) {
     var storageRef = firebase.storage().ref();
     var saveNewImg = true;
     var clothingItem = null;
@@ -129,7 +129,7 @@ router.get('/saveClothing', function(req, res) {
     }
 });
 
-router.get('/deleteClothing', function(req, res) {
+router.post('/deleteClothing', function(req, res) {
     req.docRef.delete().then(function() {
         console.log("Document successfully deleted!");
         res.send({error: false});

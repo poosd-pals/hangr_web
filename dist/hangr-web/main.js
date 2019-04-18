@@ -128,6 +128,19 @@ var ApiService = /** @class */ (function () {
             console.log(data);
         });
     };
+    ApiService.prototype.saveClothing = function (clothingForm) {
+        this.http.post('/clothing/saveClothing', {
+            name: clothingForm.controls['name'].value,
+            category: clothingForm.controls['category'].value,
+            imgUri: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png',
+            wearsBeforeWash: clothingForm.controls['wearsBeforeWash'].value,
+            colors: clothingForm.controls['colors'].value,
+            tags: clothingForm.controls['tags'].value
+        })
+            .subscribe(function (data) {
+            console.log(data);
+        });
+    };
     ApiService.prototype.getClothing = function () {
         return this.clothingList = this.CLOSET.slice(0);
     };
@@ -991,7 +1004,7 @@ var UploadComponent = /** @class */ (function () {
             return;
         }
         console.log(this.clothingForm);
-        this.api.addClothing(this.clothingForm);
+        this.api.saveClothing(this.clothingForm);
         this.success = true;
         // TODO: Send to Firebase
         console.log("form submittd!");

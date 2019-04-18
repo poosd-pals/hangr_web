@@ -11,7 +11,7 @@ var db = firebase.firestore();
 // var currentUser = firebase.auth().currentUser;
 
 // Processes array of document reference ids
-router.get('/assembleOutfit', function(req, res) {
+router.post('/assembleOutfit', function(req, res) {
     var error = false;
     req.clothingItems.map((clothingRefId) => {
         var clothingRef = db.collection(req.session.uid).doc(clothingRefId);
@@ -34,7 +34,7 @@ router.get('/assembleOutfit', function(req, res) {
         res.send({error: false, message: 'Successfully assembled outfit!'});
 });
 
-router.get('/getCleanClothes', function(req, res) {
+router.post('/getCleanClothes', function(req, res) {
     db.collection(req.session.uid).where('wearsLeft', '!=', 0).get()
     .then(function(querySnapshot) {
         res.json('clothingItems', querySnapshot.docs);
@@ -48,6 +48,8 @@ router.get('/getCleanClothes', function(req, res) {
         console.log("Error getting documents: ", error);
         res.send({error: true, message: 'Error getting clean clothes!'});
     });
-})
+});
+
+
 
 module.exports = router;
