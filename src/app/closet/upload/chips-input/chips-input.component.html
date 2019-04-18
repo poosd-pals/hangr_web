@@ -1,0 +1,27 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<mat-form-field class="example-chip-list">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+             [removable]="removable" (removed)="remove(tag)">
+      {{tag.name}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="New tag..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+</mat-form-field>
+
+<!--<mat-chip-list>
+    <mat-chip disableRipple matRipple matRippleRadius="1">One fish</mat-chip>
+    <mat-chip disableRipple matRipple matRippleRadius="0">Two fish</mat-chip>
+    <mat-chip color="primary" selected disableRipple matRipple matRippleRadius="0">Primary fish</mat-chip>
+    <mat-chip color="accent" selected disableRipple matRipple matRippleRadius="0">Accent fish</mat-chip>
+  </mat-chip-list>-->
+
+<!-- Copyright 2019 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

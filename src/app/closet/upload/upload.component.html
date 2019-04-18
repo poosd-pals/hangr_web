@@ -7,8 +7,7 @@
       <button class="fileButton" type="button" (click)="clothingImageUpload.click()">
         <img [src]="imgUrl">
       </button>
-        <input type="file" #clothingImageUpload (change)="updateImage($event)" style="display: none;" />
-        
+        <input type="file" #clothingImageUpload (change)="processFile($event)" style="display: none;" />
       </div>
       <div class="col-md nameAndCategory">
         <div class="row">
@@ -61,7 +60,9 @@
         <label>
             Tags:
             <br>
-            <input type="text" formControlName="tags">
+            <div class="mat-app-background basic-container">
+              <chips-input>loading</chips-input>
+            </div>
           </label>
     </div>
 
