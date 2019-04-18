@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { VERSION } from '@angular/material';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,8 +6,6 @@ import { VERSION } from '@angular/material';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
-
-    version = VERSION;
 
   constructor() { }
 
