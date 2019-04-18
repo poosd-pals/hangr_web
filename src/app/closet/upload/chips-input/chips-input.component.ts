@@ -20,11 +20,7 @@ export class ChipsInputComponent {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  tags: Tag[] = [
-    {name: 'Casual'},
-    {name: 'Business'},
-    {name: 'Summer'},
-  ];
+  tags: Tag[] = [];
 
   add(event: MatChipInputEvent): void {
     const input = event.input;

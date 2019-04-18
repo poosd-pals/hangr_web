@@ -49,10 +49,12 @@
         <label>
             Colors:
             <br>
-            <input type="text" formControlName="colors">
+            <!--<input type="text" formControlName="colors">
             <div *ngIf="submitted && clothingForm.controls.colors.errors" class="error">
-              <div *ngIf="clothingForm.controls.colors.errors.required">Color is required</div>
-            </div>
+              <div *ngIf="clothingForm.controls.colors.errors.required">Color is required</div>-->
+              <div class="mat-app-background basic-container">
+                <chips-input></chips-input>
+              </div>
           </label>
     </div>
 
@@ -61,7 +63,7 @@
             Tags:
             <br>
             <div class="mat-app-background basic-container">
-              <chips-input>loading</chips-input>
+              <chips-input></chips-input>
             </div>
           </label>
     </div>
