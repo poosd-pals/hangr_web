@@ -1,3 +1,5 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 .addLink {
     text-decoration: none;
     color: white;
@@ -102,6 +104,11 @@
       padding-left: 15px;
   }
 
+  .sidenav-submit {
+      padding-top: 20px;
+      text-align: center;
+  }
+
   .sidenav p {
     padding-left: 15px;
     padding-top: 10px;
@@ -109,6 +116,7 @@
     font-size: 19px;
     color: #818181;
     display: block;
+    text-align: center;
   }
   
   /* When you mouse over the navigation links, change their color */
@@ -126,4 +134,12 @@
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+  }
+
+  .tagList {
+      padding-left: 15px;
+  }
+
+  mat-divider {
+      padding-bottom: 10px;
   }

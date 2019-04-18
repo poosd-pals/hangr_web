@@ -1,8 +1,13 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <!-- Contents of the Sidebar -->
 <div class="sidenav">
 
     <!-- Begin Category List -->
-    <p>Categories</p>
+    <div class="align-self">
+    <p>Categories</p></div>
+
+    <mat-divider></mat-divider>
 
     <div class="sidenav-categories">
         <form action="">
@@ -15,7 +20,24 @@
 
     <p>Tags</p>
 
-    <div class="tag-list">
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="tagList">
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(tag)"> {{ tag.name }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </mat-form-field>
+
+    <div class="sidenav-submit">
+        <button mat-raised-button>Submit</button>
+    </div>
+
+
+
+<!--     <div class="tag-list">
         <a *ngFor="let tag of tags"
             (click)="setListTo('all', {tag: tag})"
             class="tag-default tag-pill">
@@ -29,7 +51,7 @@
 
     <div [hidden]="!tagsLoaded || tags.length > 0">
         No tags are here... yet.
-    </div>
+    </div> -->
 
 </div>
 <!-- Ends contents of the Sidebar -->
