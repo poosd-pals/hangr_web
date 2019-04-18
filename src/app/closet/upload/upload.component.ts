@@ -15,6 +15,7 @@ export class UploadComponent implements OnInit {
   submitted = false;
   success = false;
 
+  // Default image
   imgUrl: String = "../../../assets/image-upload-icon.png";
 
   constructor(private api: ApiService, private fb: FormBuilder) { 
@@ -30,13 +31,14 @@ export class UploadComponent implements OnInit {
   ngOnInit() {
   }
 
-  updateImage(Event:any){
+  processFile(imageFile: any){
     if ((<HTMLInputElement>event.target).files && (<HTMLInputElement>event.target).files[0]) {
       var reader = new FileReader();
       reader.onload = (event: any) => {
           this.imgUrl = event.target.result;
       }
       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+      console.log((<HTMLInputElement>event.target).files[0]);
   }
   }
 
