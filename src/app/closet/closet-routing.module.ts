@@ -4,7 +4,6 @@ import { Routes, RouterModule } from  '@angular/router';
 import { ListComponent } from  './list/list.component';
 import { UploadComponent } from './upload/upload.component';
 import { ClosetComponent } from './closet.component';
-import { OutfitComponent } from './outfit/outfit.component';
 import { EditComponent } from './edit/edit.component';
 
 import { AuthGuard } from  '../auth/auth.guard';
