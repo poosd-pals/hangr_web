@@ -41,7 +41,6 @@ export class UploadComponent implements OnInit {
 
   // Progress monitoring
   percentage: Observable<number>;
-
   snapshot: Observable<any>;
 
   // Download URL
@@ -60,7 +59,8 @@ export class UploadComponent implements OnInit {
   // Default image
   imgUrl: String = "../../../assets/image-upload-icon.png";
 
-  constructor(private api: ApiService, private storage: AngularFireStorage, private fb: FormBuilder, private clothingService: ClothingService, private router: Router) { 
+  constructor(private api: ApiService, private fb: FormBuilder, 
+    private clothingService: ClothingService, private router: Router) { 
     this.clothingForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -91,15 +91,15 @@ export class UploadComponent implements OnInit {
           this.imgUrl = event.target.result;
       }
       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
-      const file = (<HTMLInputElement>event.target).files[0];
+    //   const file = (<HTMLInputElement>event.target).files[0];
 
-      var currentUser = JSON.parse(localStorage.getItem('user'));
+    //   var currentUser = JSON.parse(localStorage.getItem('user'));
 
-      const path = `${currentUser.uid}/${new Date().getTime()}_${file.name}`;
-      if (file.type.split('/')[0] !== 'image') { 
-        console.error('unsupported file type :( ')
-        return;
-      }
+    //   const path = `${currentUser.uid}/${new Date().getTime()}_${file.name}`;
+    //   if (file.type.split('/')[0] !== 'image') { 
+    //     console.error('unsupported file type :( ')
+    //     return;
+    //   }
 
       //this.afStorage.upload('/upload/to/this-path', (<HTMLInputElement>event.target).files[0]);
       console.log((<HTMLInputElement>event.target).files[0]);
@@ -136,7 +136,6 @@ export class UploadComponent implements OnInit {
       docRef: this.currentDocRef,
       clothing: this.clothing
     });
-    this.api.addClothing(this.clothing);
 
     // TODO: Send to Firebase
     console.log("form submitted!");
