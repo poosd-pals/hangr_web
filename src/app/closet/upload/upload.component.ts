@@ -7,7 +7,6 @@ import { ChipsInputComponent } from './chips-input/chips-input.component';
 import { ApiService } from './../../api/api.service';
 import { ClothingService } from './../../api/clothing/clothing.service';
 
-
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 
@@ -93,15 +92,13 @@ export class UploadComponent implements OnInit {
 
     console.log(this.clothingForm.value);
 
-    this.api.addClothing(this.clothingForm);
-
     this.success = true;
 
     // TODO: Make this into a for loop for readability. Maybe.
     this.clothing.name = this.clothingForm.controls['name'].value;
     this.clothing.category = this.clothingForm.controls['category'].value;
     this.clothing.wearsTotal = this.clothingForm.controls['wearsBeforeWash'].value;
-    this.clothing.wearsLeft = this.clothingForm.controls['wearsBeforeWash'].value;
+    this.clothing.wearsLeft = this.clothing.wearsTotal;
     this.clothing.tags = this.clothingForm.controls['tags'].value;
     this.clothing.colors = this.clothingForm.controls['colors'].value;
 
@@ -111,6 +108,7 @@ export class UploadComponent implements OnInit {
       docRef: null,
       clothing: this.clothing
     });
+    this.api.addClothing(this.clothing);
 
     // TODO: Send to Firebase
     console.log("form submitted!");
