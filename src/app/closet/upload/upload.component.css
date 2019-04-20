@@ -3,13 +3,20 @@
     flex-direction: column;
     padding-top: 24px;
   }
-  
-  label {
-    display: block;
-    width: 10em;
-    margin: .5em 0 1.5em;
-    font-weight: bold;
-  }
+
+.card.content {
+  padding-top: 2%;
+  margin: auto;
+  width: 80%;
+}
+
+label {
+  display: block;
+  width: 10em;
+  margin: .5em 0 1.5em;
+  font-weight: bold;
+  width: 100%;
+}
   
 input {
     width: 100%;
@@ -17,12 +24,12 @@ input {
     font-size: 1em;
     margin-top: .2em;
     padding-left: .4em;
-    border: 1px solid #888;
+    border: 0px solid #888;
 }
 
-label {
-    width: 100%;
-  }
+.mat-form-field {
+  width: 100%;
+}
 
   button {
       margin-top: .4em;
@@ -39,8 +46,8 @@ label {
   }
 
   .photo {
-      padding-top: 3%;
-      padding-left: 8%;
+      padding-top: 5%;
+      padding-left: 10%;
       padding-right: 0%;
   }
 
@@ -55,7 +62,7 @@ label {
   }
 
   .fileButton {
-    width: 80%;
+    width: 50%;
    background-color: white; 
   }
 
@@ -69,4 +76,20 @@ label {
 
   .nameAndCategory {
     padding-top: 1%;
+  }
+
+  .chip-list {
+    border: 0px;
+    width: 100%;
+  }
+
+  input.mat-chip-input {
+    border: 0px;
+  }
+
+  .debug {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
   }
