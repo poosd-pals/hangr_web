@@ -5,5 +5,6 @@ export interface ClothingItem {
     wearsLeft: number;
     tags: string[];
     colors: string[];
-    imgPath: string;
+    imageUrl: string;
+    imageFilename: string;
 }  

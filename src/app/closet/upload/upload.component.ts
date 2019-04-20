@@ -71,13 +71,14 @@ export class UploadComponent implements OnInit {
 
     // Instantiate instance of clothing
     this.clothing = {
-      name: '',
-      category: '',
-      wearsTotal: 1,
-      wearsLeft: 1,
-      tags: [],
-      colors: [],
-      imgPath: ''
+        name: '',
+        category: '',
+        wearsTotal: 1,
+        wearsLeft: 1,
+        tags: [],
+        colors: [],
+        imageUrl: '',
+        imageFilename: '',
     }
   }
 

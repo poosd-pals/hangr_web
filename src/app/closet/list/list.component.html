@@ -12,7 +12,8 @@
     <div class="sidenav-categories">
         <form action="">
             <div class="category list" *ngFor="let category of categories">
-               <input type="radio" id = "{{ category }}" name="itemCategory" value="{{ category }}"> {{ category }}<br>
+               <input type="radio" [(ngModel)]="category" (change)="filterExact('category', category)" 
+                    id="{{ category }}" name="itemCategory" value="{{ category }}"> {{ category }}<br>
             </div>
         </form>
     </div>
@@ -44,7 +45,7 @@
 
     <!-- Iterates through clothing in cards -->
     <div class ="row"><div class="card-deck">
-        <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let item of closet">
+        <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let item of filteredClothes">
             <div class="card mx-auto text-center" >
                 <img class="card-img-top" src="{{ item.imageUrl }}" alt="Card image cap">
                 <div class="card-body">
