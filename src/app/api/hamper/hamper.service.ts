@@ -21,6 +21,6 @@ export class HamperService {
   }
 
   getHamper() {
-      return this.firestore.collection('clothing', ref => ref.where('uid', '==', this.currentUser.uid)).snapshotChanges();
+      return this.firestore.collection('clothing', ref => ref.where('wearsLeft', '==', 0).where('uid', '==', this.currentUser.uid)).snapshotChanges();
   }
 }

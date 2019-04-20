@@ -69,6 +69,7 @@ var config = {
     //AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     ClosetModule,
     AppRoutingModule,
     MaterialModule

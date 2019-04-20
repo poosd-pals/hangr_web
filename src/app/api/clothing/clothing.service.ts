@@ -43,6 +43,7 @@ export class ClothingService {
   }
 
   saveClothing(data) {
+    console.log(data.imageUrl);
     if (data.docRef == null) {
       return new Promise<any>((resolve, reject) =>{
         this.firestore.collection('clothing')
@@ -51,8 +52,8 @@ export class ClothingService {
               // dateCreated: new Date(),
               name: data.clothing.name,
               category: data.clothing.category,
-              imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png',
-              imageFilename: 'new.png',
+              imageUrl: data.imageUrl,
+              imageFilename: data.imageFilename,
               wearsTotal: parseInt(data.clothing.wearsTotal),
               wearsLeft: parseInt(data.clothing.wearsLeft),
               colors: data.clothing.colors,
@@ -68,8 +69,8 @@ export class ClothingService {
           uid: this.currentUser.uid,
               name: data.clothing.name,
               category: data.clothing.category,
-              imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png',
-              imageFilename: 'new.png',
+              imageUrl: data.imageUrl.toString(),
+              imageFilename: data.imageFilename,
               wearsTotal: data.clothing.wearsTotal,
               colors: data.clothing.colors,
               tags: data.clothing.tags

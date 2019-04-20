@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { Router } from "@angular/router";
 
 import { ApiService } from './../../api/api.service';
@@ -13,6 +14,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 
 import { ClothingItem } from './../clothing-model';
+import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-upload',
@@ -22,6 +24,10 @@ import { ClothingItem } from './../clothing-model';
 export class UploadComponent implements OnInit {
   // clothing instance
   clothing: ClothingItem;
+
+  // drop down list categories
+  categories = Constants.categories;
+  selectedCategory: string = '';
   
   // form stuff
   clothingForm: FormGroup;
@@ -36,18 +42,10 @@ export class UploadComponent implements OnInit {
 
   currentDocRef = null;
 
-  // Main task 
-  task: AngularFireUploadTask;
-
-  // Progress monitoring
-  percentage: Observable<number>;
-  snapshot: Observable<any>;
-
-  // Download URL
+  uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
-
-  // State for dropzone CSS toggling
-  isHovering: boolean;
+  fileName: string;
+  imageUrl: string;
 
   // Enter, comma
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -60,10 +58,9 @@ export class UploadComponent implements OnInit {
   imgUrl: String = "../../../assets/image-upload-icon.png";
 
   constructor(private api: ApiService, private fb: FormBuilder, 
-    private clothingService: ClothingService, private router: Router) { 
+    private clothingService: ClothingService, private router: Router, private storage: AngularFireStorage) { 
     this.clothingForm = this.fb.group({
       name: ['', Validators.required],
-      category: ['', Validators.required],
       wearsBeforeWash: ['', Validators.required],
       colors: [],
       tags: []
@@ -85,6 +82,10 @@ export class UploadComponent implements OnInit {
   ngOnInit() {
   }
 
+  selectChangeHandler (event: any) {
+    this.selectedCategory = event.target.value;
+  }
+
   processFile(imageFile: any){
     if ((<HTMLInputElement>event.target).files && (<HTMLInputElement>event.target).files[0]) {
       var reader = new FileReader();
@@ -92,15 +93,22 @@ export class UploadComponent implements OnInit {
           this.imgUrl = event.target.result;
       }
       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
-    //   const file = (<HTMLInputElement>event.target).files[0];
+      const file = (<HTMLInputElement>event.target).files[0];
+      this.fileName = file.name;
 
-    //   var currentUser = JSON.parse(localStorage.getItem('user'));
+      var currentUser = JSON.parse(localStorage.getItem('user'));
 
-    //   const path = `${currentUser.uid}/${new Date().getTime()}_${file.name}`;
-    //   if (file.type.split('/')[0] !== 'image') { 
-    //     console.error('unsupported file type :( ')
-    //     return;
-    //   }
+      const filePath = `${currentUser.uid}/${new Date().getTime()}_${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+        finalize(() => { this.downloadURL = fileRef.getDownloadURL(); this.downloadURL.subscribe(url=>{this.imageUrl = url});})
+     )
+    .subscribe()
 
       //this.afStorage.upload('/upload/to/this-path', (<HTMLInputElement>event.target).files[0]);
       console.log((<HTMLInputElement>event.target).files[0]);
@@ -125,18 +133,21 @@ export class UploadComponent implements OnInit {
 
     // TODO: Make this into a for loop for readability. Maybe.
     this.clothing.name = this.clothingForm.controls['name'].value;
-    this.clothing.category = this.clothingForm.controls['category'].value;
+    this.clothing.category = this.selectedCategory;
     this.clothing.wearsTotal = this.clothingForm.controls['wearsBeforeWash'].value;
     this.clothing.wearsLeft = this.clothing.wearsTotal;
     this.clothing.tags = this.clothingForm.controls['tags'].value;
     this.clothing.colors = this.clothingForm.controls['colors'].value;
 
     console.log("this.clothing value: " + JSON.stringify(this.clothing));
-
+    console.log(this.currentDocRef);
     this.clothingService.saveClothing({
       docRef: this.currentDocRef,
-      clothing: this.clothing
+      clothing: this.clothing,
+      imageUrl: this.imageUrl,
+      imageFilename: this.fileName
     });
+    // this.api.addClothing(this.clothing);
 
     // TODO: Send to Firebase
     console.log("form submitted!");
@@ -164,7 +175,7 @@ export class UploadComponent implements OnInit {
     const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.colors.splice(index, 1);
+      this.tags.splice(index, 1);
     }
   }
 

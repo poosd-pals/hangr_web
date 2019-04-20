@@ -11,24 +11,7 @@ import { ClothingItem } from '../clothing-model'
 })
 export class EditComponent implements OnInit {
 
-  constructor( private firestore: AngularFirestore ) { }
-
-  shirt: ClothingItem = { name: 'Toxicable', category: 'Shirt', colors: ['Black'],
-    wearsTotal: 2, wearsLeft: 1, tags: ['hello', 'mylady'], imgPath: 'Stuff'} ;
-
-    createClothingItem(data) {
-        return new Promise<any>((resolve, reject) => {
-            this.firestore
-                .collection('clothing')
-                .add(data)
-                .then(res => {}, err => reject(err));
-        });
-    }
-
-
-    getClothingItems() {
-        return this.firestore.collection('clothing').snapshotChanges();
-    }
+  constructor(  ) { }
 
   ngOnInit() {
   }
