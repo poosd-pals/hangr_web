@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Directive, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import {Form} from '@angular/forms';
 
@@ -14,13 +15,14 @@ import { AuthService } from  '../auth/auth.service';
 
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   form: FormGroup;
+  submitted: boolean = false;
 
   constructor(private  authService:  AuthService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl('')
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
     });
 
     console.log(this.form.value);
