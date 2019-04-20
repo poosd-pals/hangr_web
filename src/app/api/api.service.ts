@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Clothing } from './../closet/clothing';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -43,7 +41,8 @@ export class ApiService {
     }
 
     getClothing() {
-        return this.firestore.collection('clothing').snapshotChanges();
+        var currentUser = JSON.parse(localStorage.getItem('user'));
+        return this.firestore.collection('clothing', ref => ref.where('uid', '==', currentUser.uid)).snapshotChanges();
     }
 
 

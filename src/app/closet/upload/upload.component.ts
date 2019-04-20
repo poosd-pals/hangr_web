@@ -14,6 +14,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 
 import { ClothingItem } from './../clothing-model';
+import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-upload',
@@ -23,6 +24,10 @@ import { ClothingItem } from './../clothing-model';
 export class UploadComponent implements OnInit {
   // clothing instance
   clothing: ClothingItem;
+
+  // drop down list categories
+  categories = Constants.categories;
+  selectedCategory: string = '';
   
   // form stuff
   clothingForm: FormGroup;
@@ -52,10 +57,10 @@ export class UploadComponent implements OnInit {
   // Default image
   imgUrl: String = "../../../assets/image-upload-icon.png";
 
-  constructor(private api: ApiService, private storage: AngularFireStorage, private fb: FormBuilder, private clothingService: ClothingService, private router: Router) { 
+  constructor(private api: ApiService, private fb: FormBuilder, 
+    private clothingService: ClothingService, private router: Router, private storage: AngularFireStorage) { 
     this.clothingForm = this.fb.group({
       name: ['', Validators.required],
-      category: ['', Validators.required],
       wearsBeforeWash: ['', Validators.required],
       colors: [],
       tags: []
@@ -74,6 +79,10 @@ export class UploadComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  selectChangeHandler (event: any) {
+    this.selectedCategory = event.target.value;
   }
 
   processFile(imageFile: any){
@@ -123,7 +132,7 @@ export class UploadComponent implements OnInit {
 
     // TODO: Make this into a for loop for readability. Maybe.
     this.clothing.name = this.clothingForm.controls['name'].value;
-    this.clothing.category = this.clothingForm.controls['category'].value;
+    this.clothing.category = this.selectedCategory;
     this.clothing.wearsTotal = this.clothingForm.controls['wearsBeforeWash'].value;
     this.clothing.wearsLeft = this.clothing.wearsTotal;
     this.clothing.tags = this.clothingForm.controls['tags'].value;
@@ -165,7 +174,7 @@ export class UploadComponent implements OnInit {
     const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.colors.splice(index, 1);
+      this.tags.splice(index, 1);
     }
   }
 

@@ -66,6 +66,7 @@ var config = {
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(config),
+    //AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

@@ -36,9 +36,11 @@ export class AuthService {
         this.router.navigate(['closet/list']);
     } catch (e) {
         alert("Error!"  +  e.message);
+        return -1;
     }
 
     console.log(form.value);
+    return 0;
   }
 
   async register(form: FormGroup) {
