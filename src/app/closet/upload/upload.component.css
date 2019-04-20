@@ -93,3 +93,16 @@ input {
     margin-left: auto;
     margin-right: auto;
   }
+
+.btn {
+  margin-right: 1.5%;
+  margin-top: 0%;
+  margin-bottom: 2%;
+}
+
+a {
+  font: Helvetica;
+  font-size: 105%;
+  color: white;
+  text-decoration: none;
+}
