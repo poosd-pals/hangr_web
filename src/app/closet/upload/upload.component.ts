@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
 
 import { ApiService } from './../../api/api.service';
 import { ClothingService } from './../../api/clothing/clothing.service';
@@ -33,6 +35,20 @@ export class UploadComponent implements OnInit {
 
   currentDocRef = null;
 
+  // Main task 
+  task: AngularFireUploadTask;
+
+  // Progress monitoring
+  percentage: Observable<number>;
+
+  snapshot: Observable<any>;
+
+  // Download URL
+  downloadURL: Observable<string>;
+
+  // State for dropzone CSS toggling
+  isHovering: boolean;
+
   // Enter, comma
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -43,7 +59,7 @@ export class UploadComponent implements OnInit {
   // Default image
   imgUrl: String = "../../../assets/image-upload-icon.png";
 
-  constructor(private api: ApiService, /*private afStorage: AngularFireStorage,*/ private fb: FormBuilder, private clothingService: ClothingService) { 
+  constructor(private api: ApiService, private storage: AngularFireStorage, private fb: FormBuilder, private clothingService: ClothingService) { 
     this.clothingForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -74,6 +90,16 @@ export class UploadComponent implements OnInit {
           this.imgUrl = event.target.result;
       }
       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+      const file = (<HTMLInputElement>event.target).files[0];
+
+      var currentUser = JSON.parse(localStorage.getItem('user'));
+
+      const path = `${currentUser.uid}/${new Date().getTime()}_${file.name}`;
+      if (file.type.split('/')[0] !== 'image') { 
+        console.error('unsupported file type :( ')
+        return;
+      }
+
       //this.afStorage.upload('/upload/to/this-path', (<HTMLInputElement>event.target).files[0]);
       console.log((<HTMLInputElement>event.target).files[0]);
   }
