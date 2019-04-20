@@ -1,9 +1,10 @@
 import { FormGroup } from '@angular/forms';
-import { Clothing } from './../closet/clothing';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+
+import { Clothing } from './../closet/clothing';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 export class ApiService {
 
-  apiURL: string = 'http://localhost:3000/closet/upload/api/';
-    
-  constructor( private firestore: AngularFirestore ) {}
+    // apiURL: string = 'http://localhost:3000/closet/upload/api/';
+
+    constructor( private firestore: AngularFirestore ) {}
 
     clothingList = [];
 
@@ -44,6 +45,7 @@ export class ApiService {
     getClothing() {
         return this.firestore.collection('clothing').snapshotChanges();
     }
+
 
 
 /*   addClothing (clothingForm: FormGroup){

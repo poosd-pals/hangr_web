@@ -28,32 +28,44 @@ export class ListComponent implements OnInit {
         {name: 'Summer'},
       ];
 
-    // Empty array 'closet'.
-    closet;
-
-    // Hardcoded array of categories for sidenav.
+          // Hardcoded array of categories for sidenav.
     categories = ['Accessories', 'Bags', 'Dresses', 'Intimates & Sleepwear',
-        'Jackets & Coats', 'Jeans', 'Jewelry', 'Pants', 'Shoes', 'Shorts', 'Skirts', 'Sweaters', 'Swim', 'Tops', 'Other'];
+    'Jackets & Coats', 'Jeans', 'Jewelry', 'Pants', 'Shoes', 'Shorts', 'Skirts', 'Sweaters', 'Swim', 'Tops', 'Other'];
+
+    // Empty array 'closet'.
+    closet: ClothingItem[];
+
+
 
     constructor(private api: ApiService) {
         this.addButtonLongText = false;
     }
 
+/*      ngOnInit() {
+        this.api.getClothing();
+    } */
+
+ngOnInit() {
+        this.api.getClothing().subscribe(data => {
+          this.closet = data.map(e => {
+            return {name: e.payload.doc.id,
+              ...e.payload.doc.data()
+            } as ClothingItem;
+          })
+        });
+      }
+ 
+/*     getClothingItems = () =>
+        this.api.getClothing().subscribe(res => (this.closet = res)) */
+
     remove(tag: Tag): void {
         const index = this.tags.indexOf(tag);
 
         if (index >= 0) {
-          this.tags.splice(index, 1);
+            this.tags.splice(index, 1);
         }
-      }
-
-    ngOnInit() {
-        this.api.getClothing();
-    }
-
-    getClothingItems = () =>
-        this.api.getClothing().subscribe(res => (this.closet = res))
-
+        }
+    
 
 
 /*   ngOnInit() {
