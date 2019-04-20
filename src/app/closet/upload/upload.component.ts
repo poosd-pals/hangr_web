@@ -32,6 +32,8 @@ export class UploadComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
+  currentDocRef = null;
+
   // Enter, comma
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -105,7 +107,7 @@ export class UploadComponent implements OnInit {
     console.log("this.clothing value: " + JSON.stringify(this.clothing));
 
     this.clothingService.saveClothing({
-      docRef: null,
+      docRef: this.currentDocRef,
       clothing: this.clothing
     });
     this.api.addClothing(this.clothing);

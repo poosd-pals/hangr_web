@@ -26,12 +26,20 @@ export class ClothingService {
   // private db = firebase.firestore();
   // accountLogs: Observable<ClothingItemId[]>;
   constructor(private firestore: AngularFirestore) {
-    this.currentUser = localStorage.getItem('user');
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
     // this.clothingItemCollection = afs.collection<ClothingItem>('clothing');
   }
 
   uploadClothing(data) {
     
+  }
+
+  deleteClothing(data) {
+    return new Promise<any>((resolve, reject) =>{
+      data.docRef.delete()
+          .then(res => {}, err => reject(err));
+
+    });
   }
 
   saveClothing(data) {
