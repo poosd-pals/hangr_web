@@ -89,6 +89,7 @@ export class ListComponent implements OnInit {
             });
         });
 
+<<<<<<< HEAD
         var filter;
 
         // Check what tag is clicked.
@@ -145,6 +146,78 @@ export class ListComponent implements OnInit {
             }
         }
     }*/
+=======
+		filter() {
+			/*this.api.getClothing().subscribe(data => {
+	        this.closet = data.map(e => {
+	            return {name: e.payload.doc.id,
+	                    ...e.payload.doc.data()
+	                } as ClothingItem;
+	            });
+	        });*/
+
+			//alert('test');
+
+			var filter = 'null';
+
+			// Check what tag is clicked.
+			if ((<HTMLInputElement>document.getElementById('Accessories')).checked) {
+				filter = 'Accessory';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Bags')).checked) {
+				filter = 'Bag';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Dresses')).checked) {
+				filter = 'Dress';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Intimates & Sleepwear')).checked) {
+				filter = 'Intimates & Sleepwear';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Jackets & Coats')).checked) {
+				filter = 'Jackets & Coats';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Jeans')).checked) {
+				filter = 'Jeans';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Jewelry')).checked) {
+				filter = 'Jewelry';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Pants')).checked) {
+				filter = 'Pants';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Shoes')).checked) {
+				filter = 'Shoes';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Shorts')).checked) {
+				filter = 'Shorts';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Skirts')).checked) {
+				filter = 'Skirts';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Sweaters')).checked) {
+				filter = 'Sweater';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Swim')).checked) {
+				filter = 'Swim';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Tops')).checked) {
+				//alert("test again");
+				filter = 'Shirt';
+			}
+			else if ((<HTMLInputElement>document.getElementById('Other')).checked) {
+				filter = 'Other';
+			}
+
+			//alert(filter);
+
+			for (var i = 0; i < this.closet.length; i++) {
+				if (this.closet[i].category != filter) {
+					this.closet.splice(i, 1);
+					i--;
+				}
+			}
+		}
+>>>>>>> bf71da5709e41c1851b71f7eaab5eba3f21e7c50
 
 
 }

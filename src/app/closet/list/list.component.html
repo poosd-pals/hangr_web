@@ -12,8 +12,12 @@
     <div class="sidenav-categories">
         <form action="">
             <div class="category list" *ngFor="let category of categories">
+<<<<<<< HEAD
                <input type="radio" [(ngModel)]="category" (change)="filterExact('category', category)" 
                     id="{{ category }}" name="itemCategory" value="{{ category }}"> {{ category }}<br>
+=======
+               <input type="radio" id = '{{ category }}' name="itemCategory" value="{{ category }}"> {{ category }}<br>
+>>>>>>> bf71da5709e41c1851b71f7eaab5eba3f21e7c50
             </div>
         </form>
     </div>

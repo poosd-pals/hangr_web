@@ -2,18 +2,19 @@
   <h1>Assemble an Outfit!</h1>
 
   <div class="card content">
-      <div class="row longRow">
+      <div class="row longRow" *ngIf="showDropDown===true" class="">
         <label>
           Category
           <br>
           <mat-form-field>
-              <select matNativeControl required (change)="selectChangeHandler($event)">  
+              <select matNativeControl required (change)="selectChangeHandler($event)">
+                  <option>Select a category</option>  
                   <option *ngFor="let category of categories">{{category}} </option>  
             </select>
           </mat-form-field>
         </label>
         <button type="button" 
-                (click)="filerByCategory()" 
+                (click)="filterByCategory()" 
                 class="btn btn-info btn-sm btn-submit">
                 Select clothing
         </button>
