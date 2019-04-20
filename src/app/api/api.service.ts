@@ -43,7 +43,7 @@ export class ApiService {
     }
 
     getClothing() {
-        return this.firestore.collection('clothing').snapshotChanges();
+        return this.firestore.collection('clothing', ref => ref.where).snapshotChanges();
     }
 
 
