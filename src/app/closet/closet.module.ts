@@ -5,14 +5,16 @@ import { MatInputModule } from '@angular/material/input';
 
 import { ListComponent } from './list/list.component';
 import { UploadComponent } from './upload/upload.component';
+import { EditComponent } from './edit/edit.component';
 import { OutfitComponent } from './outfit/outfit.component';
 import { ClosetRoutingModule } from './closet-routing.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChipsInputComponent } from './upload/chips-input/chips-input.component';
 
+
 @NgModule({
-  declarations: [ListComponent, UploadComponent, OutfitComponent, ChipsInputComponent],
+  declarations: [ListComponent, UploadComponent, OutfitComponent, ChipsInputComponent, EditComponent],
   imports: [
     CommonModule,
     ClosetRoutingModule,
