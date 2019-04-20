@@ -29,6 +29,10 @@
     right: 1em;
 }
 
+.container-btn-add a {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .container-btn-add .btn-add {
     height: 62px;
     width: 62px;
@@ -87,7 +91,7 @@
     width: auto;                              /*Required to be set with a delay (see animation) to not have scrollbar. Delay is to wait container to size up*/
 }
 
-/* The sidebar menu */
+/* BEGIN SIDEBAR STYLING */
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 250px; /* Set the width of the sidebar */
@@ -95,7 +99,7 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #ededed; /* Black */
+    background-color: #ededed;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px;
   }
@@ -141,5 +145,6 @@
   }
 
   mat-divider {
-      padding-bottom: 10px;
+      padding-bottom: 15px;
   }
+  /* END SIDEBAR STYLING */

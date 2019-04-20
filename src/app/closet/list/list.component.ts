@@ -2,9 +2,6 @@ import { Clothing } from './../clothing';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../../api/api.service';
 
-
-
-
 export interface Tag {
     name: string;
   }
@@ -15,7 +12,6 @@ export interface Tag {
   styleUrls: ['./list.component.css']
 })
 
-
 export class ListComponent implements OnInit {
 
     selectable = true;
@@ -25,19 +21,18 @@ export class ListComponent implements OnInit {
     addButtonLongText: boolean;
     clothing: Object;
 
+    // TO BE DELETED: Temporary array of tags.
     tags: Tag[] = [
         {name: 'Casual'},
         {name: 'Business'},
         {name: 'Summer'},
       ];
 
-    /* tags = ['Professional', 'Casual', 'Winter', 'Summer']; */
-
     // Empty array 'closet'.
     closet: any[] = [];
 
     // Hardcoded array of categories for sidenav.
-    categories = ['Accessories', 'Bags', 'Dresses', 'Intimates & Sleepwear', 
+    categories = ['Accessories', 'Bags', 'Dresses', 'Intimates & Sleepwear',
         'Jackets & Coats', 'Jeans', 'Jewelry', 'Pants', 'Shoes', 'Shorts', 'Skirts', 'Sweaters', 'Swim', 'Tops', 'Other'];
 
     constructor(private api: ApiService) {
@@ -49,7 +44,7 @@ export class ListComponent implements OnInit {
 
     remove(tag: Tag): void {
         const index = this.tags.indexOf(tag);
-    
+
         if (index >= 0) {
           this.tags.splice(index, 1);
         }
@@ -57,7 +52,7 @@ export class ListComponent implements OnInit {
 
     ngOnInit() {}
 
-/*   ngOnInit() { 
+/*   ngOnInit() {
     this.api.getClothing().subscribe(clothing => {
         this.clothing = clothing;
         console.log(this.clothing);

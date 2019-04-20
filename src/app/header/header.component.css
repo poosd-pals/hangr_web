@@ -1,24 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300|Roboto');
 
 .navbar {
-    background-color: #7807d4;
-    font-family: 'Helvetica';
+    background-color: #ededed;
+    font-family: 'Karla';
     color: white;
 }
 
 .navbar-brand{
     font-family: 'Roboto', sans-serif;
-    color: white;
+    color: black;
     font-size: 1.3em;
     text-transform: uppercase;
 }
 
 a {
     font-size: 1em;
-    color: #dcc8ec;
+    color: black;
     cursor: pointer;
 }
 
 li > a:hover {
     color: white;
+}
+
+button {
+    font-family: 'Karla', sans-serif;
 }

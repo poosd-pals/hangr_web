@@ -15,7 +15,7 @@ import { UploadComponent } from './closet/upload/upload.component';
 import { AuthGuard } from  './auth/auth.guard';
 
 const routes: Routes = [
-  {
+    {
     path: 'login',
     component: LoginComponent
     },
@@ -28,8 +28,8 @@ const routes: Routes = [
     component:  HomeComponent,
     canActivate: [AuthGuard]
     },
-    { 
-      path: '',   
+    {
+      path: '',
       redirectTo: '/closet/list', 
       pathMatch: 'full' 
     },

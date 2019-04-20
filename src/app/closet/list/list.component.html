@@ -22,36 +22,19 @@
 
     <mat-divider></mat-divider>
 
-    <mat-form-field class="tagList">
+    <div class="tagList">
         <mat-chip-list #chipList>
             <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
                 [removable]="removable" (removed)="remove(tag)"> {{ tag.name }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
         </mat-chip-list>
-    </mat-form-field>
+    </div>
 
+    <!-- Submit button -->
     <div class="sidenav-submit">
         <button mat-raised-button>Submit</button>
     </div>
-
-
-
-<!--     <div class="tag-list">
-        <a *ngFor="let tag of tags"
-            (click)="setListTo('all', {tag: tag})"
-            class="tag-default tag-pill">
-            {{ tag }}
-        </a>
-    </div>
-
-    <div [hidden]="tagsLoaded">
-        
-    </div>
-
-    <div [hidden]="!tagsLoaded || tags.length > 0">
-        No tags are here... yet.
-    </div> -->
 
 </div>
 <!-- Ends contents of the Sidebar -->
@@ -76,7 +59,6 @@
 
 </div>
 <!-- Ends Contents of the Main List -->
-
 
 <div class="container-btn-add">
   <button type="button" class="btn btn-primary btn-add">
