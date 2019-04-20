@@ -128,7 +128,7 @@ router.post('/saveClothing', function(req, res) {
             imageUrl: imageUri,
             dateCreated: new Date(),
             imageFilename: req.fileName,
-            wearsTotal: req.wearsTotal ? req.wearsTotal : -1,
+            wearsBeforeWash: req.wearsTotal ? req.wearsTotal : -1,
             wearsLeft: req.wearsTotal ? req.wearsTotal : -1
         })
         .then(function(docRef) {

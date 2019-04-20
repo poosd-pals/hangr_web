@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 export class ApiService {
 
-  apiURL: string = 'http://localhost:3000/';
+  apiURL: string = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {
 
@@ -51,11 +51,12 @@ export class ApiService {
   }
 
   saveClothing (clothingForm: FormGroup) {
-    this.http.post(this.apiURL + 'clothing/saveClothing',
+    this.http.post(this.apiURL + '/clothing/saveClothing',
     {
       name: clothingForm.controls['name'].value,
       category: clothingForm.controls['category'].value,
-      imgUri: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png',
+      imageFilename: clothingForm.controls['image'],
       wearsBeforeWash: clothingForm.controls['wearsBeforeWash'].value,
       colors : clothingForm.controls['colors'].value,
       tags: clothingForm.controls['tags'].value
