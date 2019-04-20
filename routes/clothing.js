@@ -3,12 +3,24 @@ var router = express.Router();
 var firebase = require('firebase');
 // var functions = require('firebase-functions');
 
-var gs = require('../google-services.json');
-var config = gs.config;
-firebase.initializeApp(config);
-
 var db = firebase.firestore();
 // var currentUser = firebase.auth().currentUser;
+
+/* GET url*/
+router.get('/', function(req, res, next) {
+	if(req.session.uid) {
+		console.log("uid is not blank!");
+	}
+	else {
+		var error = req.session.hasError;
+		var errorMsg = req.session.errorMessage;
+		var regSuccess = req.session.hasRegisterSuccess;
+
+		req.session.destroy();
+
+		res.render('index', { hasError: error, errorMessage: errorMsg, hasRegisterSuccess: regSuccess });
+	}
+});
 
 router.post('/getClothing', function(req, res) {
     req.docRef.get().then(function(doc) {
@@ -92,8 +104,8 @@ router.post('/saveClothing', function(req, res) {
             category: req.category,
             colors: req.colors,
             tags: req.tags,
-            imgUrl: imageUri,
-            imgFilename: req.fileName,
+            imageUrl: imageUri,
+            imageFilename: req.fileName,
             wearsBeforeWash: req.wearsTotal,
             wearsLeft: req.wearsTotal
         })
@@ -113,8 +125,9 @@ router.post('/saveClothing', function(req, res) {
             category: req.category,
             colors: req.colors,
             tags: req.tags,
-            imgUri: imageUri,
-            imgFilename: req.fileName,
+            imageUrl: imageUri,
+            dateCreated: new Date(),
+            imageFilename: req.fileName,
             wearsTotal: req.wearsTotal ? req.wearsTotal : -1,
             wearsLeft: req.wearsTotal ? req.wearsTotal : -1
         })

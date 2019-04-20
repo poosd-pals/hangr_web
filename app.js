@@ -4,14 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+var http = require('http');
+var cors = require('cors');
 
-var indexRouter = require('./routes/index.js');
-var registerRouter = require('./routes/register.js');
-var clothingRouter = require('./routes/clothing.js');
-var outfitsRouter = require('./routes/outfits.js');
-var hamperRouter = require('./routes/hamper.js');
+var indexRouter = require('./routes/index');
+var registerRouter = require('./routes/register');
+var clothingRouter = require('./routes/clothing');
+var outfitsRouter = require('./routes/outfits');
+var hamperRouter = require('./routes/hamper');
 
 var app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,7 +25,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
 	resave: false,
 	saveUninitialized: false,
@@ -55,5 +60,26 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'dist/hangr-web/index.html'));
+  });
+  
+  /**
+   * Get port from environment and store in Express.
+   */
+  const port = process.env.PORT || '3000';
+  app.set('port', port);
+  
+  /**
+   * Create HTTP server.
+   */
+  const server = http.createServer(app);
+  
+  /**
+   * Listen on provided port, on all network interfaces.
+   */
+  server.listen(port, () => console.log(`API running on localhost:${port}`));
 
 module.exports = app;

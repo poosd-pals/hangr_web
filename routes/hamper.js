@@ -3,10 +3,6 @@ var router = express.Router();
 var firebase = require('firebase');
 // var functions = require('firebase-functions');
 
-var gs = require('../google-services.json');
-var config = gs.config;
-firebase.initializeApp(config);
-
 var db = firebase.firestore();
 // var currentUser = firebase.auth().currentUser;
 
