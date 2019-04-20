@@ -12,7 +12,7 @@
     <div class="sidenav-categories">
         <form action="">
             <div class="category list" *ngFor="let category of categories">
-                <input type="radio" name="itemCategory" value="{{ category }}"> {{ category }}<br>
+               <input type="radio" id = "{{ category }}" name="itemCategory" value="{{ category }}"> {{ category }}<br>
             </div>
         </form>
     </div>
@@ -33,14 +33,14 @@
 
     <!-- Submit button -->
     <div class="sidenav-submit">
-        <button mat-raised-button>Submit</button>
+        <button (click)="filter()">Submit</button>
     </div>
 
 </div>
 <!-- Ends contents of the Sidebar -->
 
 <!-- Contents of the Main List -->
-<div class="main">   
+<div class="main">
 
     <!-- Iterates through clothing in cards -->
     <div class ="row"><div class="card-deck">
@@ -64,7 +64,7 @@
   <button type="button" class="btn btn-primary btn-add">
     <span class="plus-sym">+</span>
     <span class="long-text">
-      <a routerLink="/closet/upload" class="addLink"> 
+      <a routerLink="/closet/upload" class="addLink">
         Add clothing
       </a>
     </span>
