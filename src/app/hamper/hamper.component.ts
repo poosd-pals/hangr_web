@@ -14,7 +14,13 @@ export class HamperComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.hamperService.getHamper());
+    var hamperItems = [];
+    this.hamperService.getHamper().subscribe(data => {
+      data.map((item) => {
+        hamperItems.push(item);
+        console.log(item);
+      })
+    })
   }
 
 }

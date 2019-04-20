@@ -6,6 +6,7 @@ import { User } from  'firebase';
 import { auth } from  'firebase/app';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,6 @@ export class HamperService {
   }
 
   getHamper() {
-    return new Promise<any>((resolve, reject) =>{
-      this.firestore.collection('clothing', ref => ref.where('wearsLeft', '==', 0).where('uid', '==', this.currentUser.uid))
-      .snapshotChanges()
-      .subscribe(res => {}, err => reject(err));
-    });
+      return this.firestore.collection('clothing', ref => ref.where('uid', '==', this.currentUser.uid)).snapshotChanges();
   }
 }
