@@ -26,6 +26,11 @@ import { HamperComponent } from './hamper/hamper.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AboutComponent } from './about/about.component';
 
+import { ClosetService } from './api/closet/closet.service';
+import { ClothingService } from './api/clothing/clothing.service';
+import { HamperService } from './api/hamper/hamper.service';
+import { OutfitsService } from './api/outfits/outfits.service';
+
 var config = {
   apiKey: "AIzaSyAkG4QmO8X_pWBBw4tQv6z_ad-3-Z_tKyc",
   authDomain: "hangr-233113.firebaseapp.com",
@@ -62,7 +67,11 @@ var config = {
     MaterialModule
   ],
   providers: [
-    AuthService
+  	AuthService,
+	ClosetService,
+	ClothingService,
+	HamperService,
+	OutfitsService
   ],
   bootstrap: [AppComponent]
 })
