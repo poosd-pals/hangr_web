@@ -6,8 +6,11 @@ import { ChipsInputComponent } from './chips-input/chips-input.component';
 
 import { ApiService } from './../../api/api.service';
 
+
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
+
+import { ClothingItem } from './../clothing-model';
 
 @Component({
   selector: 'app-upload',
@@ -15,6 +18,9 @@ import {MatChipInputEvent} from '@angular/material';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
+  // clothing instance
+  clothing: ClothingItem;
+  
   // form stuff
   clothingForm: FormGroup;
   submitted = false;
@@ -44,6 +50,17 @@ export class UploadComponent implements OnInit {
       colors: [],
       tags: []
     });
+
+    // Instantiate instance of clothing
+    this.clothing = {
+      name: '',
+      category: '',
+      wearsTotal: 1,
+      wearsLeft: 1,
+      tags: [],
+      colors: [],
+      imgPath: ''
+    }
   }
 
   ngOnInit() {
@@ -78,6 +95,16 @@ export class UploadComponent implements OnInit {
     this.api.addClothing(this.clothingForm);
 
     this.success = true;
+
+    // TODO: Make this into a for loop for readability. Maybe.
+    this.clothing.name = this.clothingForm.controls['name'].value;
+    this.clothing.category = this.clothingForm.controls['category'].value;
+    this.clothing.wearsTotal = this.clothingForm.controls['wearsTotal'].value;
+    this.clothing.wearsLeft = this.clothingForm.controls['wearsLeft'].value;
+    this.clothing.tags = this.clothingForm.controls['tags'].value;
+    this.clothing.colors = this.clothingForm.controls['colors'].value;
+
+    console.log("this.clothing value: " + JSON.stringify(this.clothing));
 
     // TODO: Send to Firebase
     console.log("form submitted!");

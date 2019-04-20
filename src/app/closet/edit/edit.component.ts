@@ -13,7 +13,7 @@ export class EditComponent implements OnInit {
 
   constructor( private firestore: AngularFirestore ) { }
 
-  shirt: ClothingItem = { name: 'Toxicable', category: 'Shirt', colors: 'Black',
+  shirt: ClothingItem = { name: 'Toxicable', category: 'Shirt', colors: ['Black'],
     wearsTotal: 2, wearsLeft: 1, tags: ['hello', 'mylady'], imgPath: 'Stuff'} ;
 
     createClothingItem(data) {
