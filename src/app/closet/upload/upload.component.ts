@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ChipsInputComponent } from './chips-input/chips-input.component';
 
 import { ApiService } from './../../api/api.service';
+import { ClothingService } from './../../api/clothing/clothing.service';
 
 
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -42,7 +43,7 @@ export class UploadComponent implements OnInit {
   // Default image
   imgUrl: String = "../../../assets/image-upload-icon.png";
 
-  constructor(private api: ApiService, /*private afStorage: AngularFireStorage,*/ private fb: FormBuilder) { 
+  constructor(private api: ApiService, /*private afStorage: AngularFireStorage,*/ private fb: FormBuilder, private clothingService: ClothingService) { 
     this.clothingForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -78,7 +79,7 @@ export class UploadComponent implements OnInit {
   }
   }
 
-  onSubmit() {
+  onSubmit(tags, colors) {
     this.submitted = true;
 
     if (this.clothingForm.invalid){
@@ -99,12 +100,17 @@ export class UploadComponent implements OnInit {
     // TODO: Make this into a for loop for readability. Maybe.
     this.clothing.name = this.clothingForm.controls['name'].value;
     this.clothing.category = this.clothingForm.controls['category'].value;
-    this.clothing.wearsTotal = this.clothingForm.controls['wearsTotal'].value;
-    this.clothing.wearsLeft = this.clothingForm.controls['wearsLeft'].value;
+    this.clothing.wearsTotal = this.clothingForm.controls['wearsBeforeWash'].value;
+    this.clothing.wearsLeft = this.clothingForm.controls['wearsBeforeWash'].value;
     this.clothing.tags = this.clothingForm.controls['tags'].value;
     this.clothing.colors = this.clothingForm.controls['colors'].value;
 
     console.log("this.clothing value: " + JSON.stringify(this.clothing));
+
+    this.clothingService.saveClothing({
+      docRef: null,
+      clothing: this.clothing
+    });
 
     // TODO: Send to Firebase
     console.log("form submitted!");
