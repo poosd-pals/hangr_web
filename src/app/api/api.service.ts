@@ -3,6 +3,7 @@ import { Clothing } from './../closet/clothing';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,8 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
   apiURL: string = 'http://localhost:3000/closet/upload/api/';
-
-  constructor(private http: HttpClient) {
-
-  }
+    
+  constructor( private firestore: AngularFirestore ) {}
 
     clothingList = [];
 
@@ -33,7 +32,21 @@ export class ApiService {
             url: 'assets/tempImg/pinkshirt.jpg'}
     ];
 
-  addClothing (clothingForm: FormGroup){
+    addClothing(data) {
+        return new Promise<any>((resolve, reject) => {
+            this.firestore
+                .collection('clothing')
+                .add(data)
+                .then(res => {}, err => reject(err));
+        });
+    }
+
+    getClothing() {
+        return this.firestore.collection('clothing').snapshotChanges();
+    }
+
+
+/*   addClothing (clothingForm: FormGroup){
     // TODO: change URL
     this.http.post('https://my-json-server.typicode.com/winterchocolatte/demo/clothings',
     {
@@ -48,11 +61,8 @@ export class ApiService {
         console.log(data);
       }
     )
-  }
+  } */
 
-    getClothing() {
-        return this.clothingList = this.CLOSET.slice(0);
-    }
 
     // Jin
 /*   getClothing(){

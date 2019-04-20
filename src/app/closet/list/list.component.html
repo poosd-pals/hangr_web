@@ -40,7 +40,7 @@
 <!-- Ends contents of the Sidebar -->
 
 <!-- Contents of the Main List -->
-<div class="main">    
+<div class="main">   
 
     <!-- Iterates through clothing in cards -->
     <div class ="row"><div class="card-deck">
@@ -48,7 +48,7 @@
             <div class="card mx-auto text-center" >
                 <img class="card-img-top" src="{{ item. url }}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{ item.name }}</h5>
+                    <h5 class="card-title">{{ item.payload.doc.data().name }}</h5>
                     <p class="card-text">{{ item.category }}</p>
                     <a class="card-text float-right text-muted" routerLink="/closet/edit">Edit</a>
                 </div>

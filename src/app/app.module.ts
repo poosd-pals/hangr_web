@@ -13,6 +13,7 @@ import { MaterialModule } from './material.module';
 
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 import { LoginComponent } from './login/login.component';
@@ -55,8 +56,9 @@ var config = {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     ClosetModule,
     AppRoutingModule,
     MaterialModule

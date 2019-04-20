@@ -1,6 +1,7 @@
-import { Clothing } from './../clothing';
 import { Component, OnInit } from '@angular/core';
+
 import { ApiService } from './../../api/api.service';
+import { ClothingItem } from '../clothing-model';
 
 export interface Tag {
     name: string;
@@ -19,7 +20,6 @@ export class ListComponent implements OnInit {
 
     // long text is the "add clothing" text when the button is expanded.
     addButtonLongText: boolean;
-    clothing: Object;
 
     // TO BE DELETED: Temporary array of tags.
     tags: Tag[] = [
@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
       ];
 
     // Empty array 'closet'.
-    closet: any[] = [];
+    closet;
 
     // Hardcoded array of categories for sidenav.
     categories = ['Accessories', 'Bags', 'Dresses', 'Intimates & Sleepwear',
@@ -37,9 +37,6 @@ export class ListComponent implements OnInit {
 
     constructor(private api: ApiService) {
         this.addButtonLongText = false;
-
-        // Populates closet with call to api getClothing.
-        this.closet = this.api.getClothing();
     }
 
     remove(tag: Tag): void {
@@ -50,7 +47,14 @@ export class ListComponent implements OnInit {
         }
       }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.api.getClothing();
+    }
+
+    getClothingItems = () =>
+        this.api.getClothing().subscribe(res => (this.closet = res))
+
+
 
 /*   ngOnInit() {
     this.api.getClothing().subscribe(clothing => {
