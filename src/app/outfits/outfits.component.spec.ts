@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChipsInputComponent } from './chips-input.component';
+import { OutfitsComponent } from './outfits.component';
 
-describe('ChipsInputComponent', () => {
-  let component: ChipsInputComponent;
-  let fixture: ComponentFixture<ChipsInputComponent>;
+describe('OutfitsComponent', () => {
+  let component: OutfitsComponent;
+  let fixture: ComponentFixture<OutfitsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChipsInputComponent ]
+      declarations: [ OutfitsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChipsInputComponent);
+    fixture = TestBed.createComponent(OutfitsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

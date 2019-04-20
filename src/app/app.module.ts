@@ -1,3 +1,4 @@
+import { Constants } from './constants/constants';
 import { AuthService } from './auth/auth.service';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,6 +27,7 @@ import { ClosetComponent } from './closet/closet.component';
 import { HamperComponent } from './hamper/hamper.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AboutComponent } from './about/about.component';
+import { OutfitsComponent } from './outfits/outfits.component';
 
 import { ClosetService } from './api/closet/closet.service';
 import { ClothingService } from './api/clothing/clothing.service';
@@ -52,6 +54,7 @@ var config = {
     HomeComponent,
     ClosetComponent,
     HamperComponent,
+    OutfitsComponent,
     PagenotfoundComponent,
     AboutComponent
   ],

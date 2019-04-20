@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ChipsInputComponent } from './chips-input/chips-input.component';
 
 import { ApiService } from './../../api/api.service';
 
