@@ -19,5 +19,11 @@ export class HamperService {
     // this.clothingItemCollection = afs.collection<ClothingItem>('clothing');
   }
 
-  
+  getHamper() {
+    return new Promise<any>((resolve, reject) =>{
+      this.firestore.collection('clothing', ref => ref.where('wearsLeft', '==', 0).where('uid', '==', this.currentUser.uid))
+      .snapshotChanges()
+      .subscribe(res => {}, err => reject(err));
+    });
+  }
 }

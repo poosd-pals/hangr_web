@@ -53,8 +53,8 @@ export class ClothingService {
               category: data.clothing.category,
               imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png',
               imageFilename: 'new.png',
-              wearsTotal: data.clothing.wearsTotal,
-              wearsLeft: data.clothing.wearsTotal,
+              wearsTotal: parseInt(data.clothing.wearsTotal),
+              wearsLeft: parseInt(data.clothing.wearsLeft),
               colors: data.clothing.colors,
               tags: data.clothing.tags
             })
