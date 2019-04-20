@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AboutComponent } from './about/about.component';
+import { OutfitsComponent } from './outfits/outfits.component';
 
 import { ListComponent } from './closet/list/list.component';
 import { UploadComponent } from './closet/upload/upload.component';
@@ -32,6 +33,11 @@ const routes: Routes = [
       path: '',
       redirectTo: '/closet/list', 
       pathMatch: 'full' 
+    },
+    {
+      path:  'outfits',
+      component:  OutfitsComponent,
+      canActivate: [AuthGuard]
     },
     {
     path:  'hamper',
