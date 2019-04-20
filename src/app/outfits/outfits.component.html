@@ -7,11 +7,15 @@
           Category
           <br>
           <mat-form-field>
-              <select matNativeControl required>  
+              <select matNativeControl required (change)="selectChangeHandler($event)">  
                   <option *ngFor="let category of categories">{{category}} </option>  
             </select>
           </mat-form-field>
         </label>
-        <button type="button" class="btn btn-info btn-sm btn-submit">Add clothing</button>
+        <button type="button" 
+                (click)="filerByCategory()" 
+                class="btn btn-info btn-sm btn-submit">
+                Select clothing
+        </button>
     </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from "@angular/router";
 
 import { ApiService } from './../../api/api.service';
 
@@ -40,7 +41,7 @@ export class UploadComponent implements OnInit {
   // Default image
   imgUrl: String = "../../../assets/image-upload-icon.png";
 
-  constructor(private api: ApiService, /*private afStorage: AngularFireStorage,*/ private fb: FormBuilder) { 
+  constructor(private api: ApiService, private fb: FormBuilder, private router: Router) { 
     this.clothingForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -106,6 +107,8 @@ export class UploadComponent implements OnInit {
 
     // TODO: Send to Firebase
     console.log("form submitted!");
+
+    this.router.navigate(['/closet/list']);
   }
 
   // Chip functions
