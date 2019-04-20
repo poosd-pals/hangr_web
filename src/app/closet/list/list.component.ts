@@ -62,22 +62,24 @@ export class ListComponent implements OnInit {
     }
 
 		filter() {
-			this.api.getClothing().subscribe(data => {
+			/*this.api.getClothing().subscribe(data => {
 	        this.closet = data.map(e => {
 	            return {name: e.payload.doc.id,
 	                    ...e.payload.doc.data()
 	                } as ClothingItem;
 	            });
-	        });
+	        });*/
 
-			var filter;
+			//alert('test');
+
+			var filter = 'null';
 
 			// Check what tag is clicked.
 			if ((<HTMLInputElement>document.getElementById('Accessories')).checked) {
 				filter = 'Accessory';
 			}
 			else if ((<HTMLInputElement>document.getElementById('Bags')).checked) {
-				filter = 'Bag'
+				filter = 'Bag';
 			}
 			else if ((<HTMLInputElement>document.getElementById('Dresses')).checked) {
 				filter = 'Dress';
@@ -112,19 +114,22 @@ export class ListComponent implements OnInit {
 			else if ((<HTMLInputElement>document.getElementById('Swim')).checked) {
 				filter = 'Swim';
 			}
-			else if ((<HTMLInputElement>document.getElementById('Shirts')).checked) {
+			else if ((<HTMLInputElement>document.getElementById('Tops')).checked) {
+				//alert("test again");
 				filter = 'Shirt';
 			}
 			else if ((<HTMLInputElement>document.getElementById('Other')).checked) {
 				filter = 'Other';
 			}
 
-			/*for (var i = 0; i < this.closet.length; i++) {
+			//alert(filter);
+
+			for (var i = 0; i < this.closet.length; i++) {
 				if (this.closet[i].category != filter) {
 					this.closet.splice(i, 1);
 					i--;
 				}
-			}*/
+			}
 		}
 
 
