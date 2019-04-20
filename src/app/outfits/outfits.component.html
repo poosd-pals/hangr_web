@@ -1,0 +1,17 @@
+<div class="main-container">
+  <h1>Assemble an Outfit!</h1>
+
+  <div class="card content">
+      <div class="row longRow">
+        <label>
+          Category
+          <br>
+          <mat-form-field>
+              <select matNativeControl required>  
+                  <option *ngFor="let category of categories">{{category}} </option>  
+            </select>
+          </mat-form-field>
+        </label>
+        <button type="button" class="btn btn-info btn-sm btn-submit">Add clothing</button>
+    </div>
+</div>
