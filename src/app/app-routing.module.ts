@@ -29,10 +29,10 @@ const routes: Routes = [
     component:  HomeComponent,
     canActivate: [AuthGuard]
     },
-    {
+    { 
       path: '',
-      redirectTo: '/closet/list', 
-      pathMatch: 'full' 
+      redirectTo: '/about',
+      pathMatch: 'full'
     },
     {
       path:  'outfits',
@@ -46,13 +46,7 @@ const routes: Routes = [
     },
     {
     path:  'about',
-    component:  AboutComponent,
-    canActivate: [AuthGuard]
-    },
-    { 
-    path: '',
-    redirectTo: '/about',
-    pathMatch: 'full'
+    component:  AboutComponent
     },
     { 
       path: '**', 
