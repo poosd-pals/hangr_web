@@ -28,9 +28,9 @@ export class HamperService {
   cleanItem(docRefData) {
     var docData;
     var self = this;
-     this.firestore.collection('clothing').doc('QwtV8MYSFcp68kZSVlS0').snapshotChanges().subscribe(data=> {
+     this.firestore.collection('clothing').doc(docRefData.id).snapshotChanges().subscribe(data=> {
        docData = data.payload.data();
-       this.firestore.collection('clothing').doc('QwtV8MYSFcp68kZSVlS0').update({
+       this.firestore.collection('clothing').doc(docRefData.id).update({
          wearsLeft: docData.wearsTotal
       });
       

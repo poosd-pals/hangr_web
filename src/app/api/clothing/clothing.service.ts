@@ -69,9 +69,9 @@ export class ClothingService {
           uid: this.currentUser.uid,
               name: data.clothing.name,
               category: data.clothing.category,
-              imageUrl: data.imageUrl.toString(),
+              imageUrl: data.imageUrl,
               imageFilename: data.imageFilename,
-              wearsTotal: data.clothing.wearsTotal,
+              wearsTotal: parseInt(data.clothing.wearsTotal),
               colors: data.clothing.colors,
               tags: data.clothing.tags
           })

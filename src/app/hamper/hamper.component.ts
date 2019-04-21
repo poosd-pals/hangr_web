@@ -18,6 +18,7 @@ export class HamperComponent implements OnInit {
 
   ngOnInit() {
 
+    // To access hamper item data, it is this.clothingItems[i].data. Then use . operator to access fields
     this.hamperService.getHamper().subscribe(data => {
       data.map(dca => {
         this.clothingItems.push(dca.payload.doc);
