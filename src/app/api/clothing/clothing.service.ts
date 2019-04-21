@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  AngularFirestore, AngularFirestoreCollection
+  AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { User } from  'firebase';
 import { auth } from  'firebase/app';

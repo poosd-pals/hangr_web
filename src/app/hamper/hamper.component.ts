@@ -10,17 +10,27 @@ import { HamperService } from './../api/hamper/hamper.service';
 })
 export class HamperComponent implements OnInit {
 
+  currentDocRef = null;
+  clothingItems = [];
+
   constructor(private hamperService: HamperService) {
   }
 
   ngOnInit() {
-    var hamperItems = [];
+
     this.hamperService.getHamper().subscribe(data => {
-      data.map((item) => {
-        hamperItems.push(item);
-        console.log(item);
-      })
-    })
+      data.map(dca => {
+        this.clothingItems.push(dca.payload.doc);
+      });
+      console.log(this.clothingItems);
+    });
+    // var hamperItems = [];
+    // this.hamperService.getHamper().subscribe(data => {
+    //   data.map((item) => {
+    //     hamperItems.push(item);
+    //     console.log(item);
+    //   })
+    // })
   }
 
 }

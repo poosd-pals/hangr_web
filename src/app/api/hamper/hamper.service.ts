@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  AngularFirestore, AngularFirestoreCollection
+  AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { User } from  'firebase';
 import { auth } from  'firebase/app';
@@ -21,6 +21,19 @@ export class HamperService {
   }
 
   getHamper() {
+      var dirtyClothes = [];
       return this.firestore.collection('clothing', ref => ref.where('wearsLeft', '==', 0).where('uid', '==', this.currentUser.uid)).snapshotChanges();
+  }
+
+  cleanItem(docRefData) {
+    var docData;
+    var self = this;
+     this.firestore.collection('clothing').doc('QwtV8MYSFcp68kZSVlS0').snapshotChanges().subscribe(data=> {
+       docData = data.payload.data();
+       this.firestore.collection('clothing').doc('QwtV8MYSFcp68kZSVlS0').update({
+         wearsLeft: docData.wearsTotal
+      });
+      
+     });
   }
 }
