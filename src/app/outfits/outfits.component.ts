@@ -14,7 +14,7 @@ export class OutfitsComponent implements OnInit {
 
   showDropDown: boolean = true;
 
-  clothesList;
+  clothesList: ClothingItem[];
 
   constructor(private api:ApiService) {
    }
@@ -24,11 +24,20 @@ export class OutfitsComponent implements OnInit {
 
   filterByCategory()
   {
+    if  (this.selectedCategory == null)
+      return;
+
     this.showDropDown = false;
 
-    this.clothesList = this.api.getClothing();
+    this.api.getClothing().subscribe(data => {
+      this.clothesList = data.map(e => {
+          return {name: e.payload.doc.id,
+                  ...e.payload.doc.data()
+              } as ClothingItem;
+          });
+      });
 
-    console.log(this.clothesList);
+    
 
     console.log("selected category: " + this.selectedCategory);
   }

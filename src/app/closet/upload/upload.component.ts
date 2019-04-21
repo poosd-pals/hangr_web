@@ -118,6 +118,8 @@ export class UploadComponent implements OnInit {
   onSubmit(tags, colors) {
     this.submitted = true;
 
+    console.log("selected category: " + this.selectedCategory);
+
     if (this.clothingForm.invalid){
         return;
     }

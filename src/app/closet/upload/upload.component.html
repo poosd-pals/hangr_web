@@ -31,7 +31,6 @@
                 <br>
                 <mat-form-field>
                     <select matNativeControl required (change)="selectChangeHandler($event)">
-                        <option>Select a category</option>  
                         <option *ngFor="let category of categories">{{category}} </option>  
                   </select>
                 </mat-form-field>
@@ -39,10 +38,6 @@
                     <input matInput formControlName="category">
                 </mat-form-field>
                 <input type="text" formControlName="category">-->
-                <div *ngIf="submitted && clothingForm.controls.category.errors" class="error">
-                  <div *ngIf="clothingForm.controls.category.errors.required">Category is required
-                </div>
-                </div>
             </label>
         </div>
       </div>
