@@ -64,12 +64,7 @@ export class OutfitsComponent implements OnInit {
   addToOutfit(clothingItem) {
     this.outfitList.push(clothingItem);
 
-    this.showFilteredList = false;
-
-    this.showDropDown = true;
-    this.showOutfitList = true;
-
-    this.selectedCategory = null;
+    this.back();
   }
 
   wear() {
@@ -79,5 +74,14 @@ export class OutfitsComponent implements OnInit {
       console.log(clothingItem);
 
     window.location.reload();
+  }
+
+  back() {
+    this.showFilteredList = false;
+
+    this.showDropDown = true;
+    this.showOutfitList = true;
+
+    this.selectedCategory = null;
   }
 }
