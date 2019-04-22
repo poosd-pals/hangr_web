@@ -63,8 +63,12 @@ export class OutfitsService {
     data.outfitList.map(clothingItem => {
       this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(clothingItem.id).get().subscribe(data => {
         var clothingData = data.data();
+        var newWearsLeft = clothingData.wearsLeft;
+        if (newWearsLeft > 0) {
+          newWearsLeft = newWearsLeft - 1;
+        }
         this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(clothingItem.id).update({
-          wearsLeft: clothingData.wearsLeft > 0 ? clothingData.wearsLeft - 1 : (clothingData.wearsLeft == 0 ? 0 : -1)
+          wearsLeft: newWearsLeft
         })
       })
     });
