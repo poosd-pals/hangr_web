@@ -28,6 +28,19 @@
     </div>
     <!-- End Category List -->
 
+    <p>Colors</p>
+
+    <mat-divider></mat-divider>
+
+    <div class="colorList">
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let color of filteredColors" [selectable]="selectable"
+                [removable]="removable" (removed)="removeColor(color)"> {{ color }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+
     <p>Tags</p>
 
     <mat-divider></mat-divider>
@@ -35,11 +48,20 @@
     <div class="tagList">
         <mat-chip-list #chipList>
             <mat-chip *ngFor="let tag of filteredTags" [selectable]="selectable"
-                [removable]="removable" (removed)="remove(tag)"> {{ tag.name }}
+                [removable]="removable" (removed)="remove(tag)"> {{ tag }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
         </mat-chip-list>
     </div>
+
+<!--     <div class="colorList">
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let tag of anArray" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(tag)"> {{ tag }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </div> -->
 
     <!-- Submit button -->
     <div class="sidenav-submit">

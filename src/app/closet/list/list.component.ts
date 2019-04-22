@@ -7,13 +7,6 @@ import { Constants } from '../../constants/constants';
 import * as _ from 'lodash';
 import { TagContentType } from '@angular/compiler';
 
-export class Tag {
-    name: string;
-
-    constructor( name: string ) {
-        this.name = name; }
-  }
-
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -28,8 +21,10 @@ export class ListComponent implements OnInit {
     filled = false;
 
     // Empty array 'tags' of objects type 'Tag'
-    tagsArray: Tag[];
-    filteredTags: Tag[];
+    tagsArray: string[];
+    filteredTags: string[];
+    colorsArray: string[];
+    filteredColors: string[];
 
     // long text is the "add clothing" text when the button is expanded.
     addButtonLongText: boolean;
@@ -47,6 +42,8 @@ export class ListComponent implements OnInit {
 
         this.tagsArray = [];
         this.filteredTags = [];
+        this.colorsArray = [];
+        this.filteredColors = [];
     }
 
     // filter-able properties
@@ -69,29 +66,53 @@ export class ListComponent implements OnInit {
             });
     }
 
+    // Called when closet is initialized. Initialzes the tag array and the colors array.
     private tagFill() {
         if (typeof this.closet !== 'undefined' && this.filled === false) {
             this.filled = true;
             for (const item of this.closet) {
                 for (const tag of item.tags) {
-                    const tagInstance: Tag = { name: tag };
-                    this.tagsArray.push(tagInstance);
+                    if (!this.tagsArray.includes(tag)) {
+                        console.log('Pushing ' + tag);
+                        this.tagsArray.push(tag);
+                    }
+                }
+                for (const color of item.colors) {
+                    if(!this.colorsArray.includes(color)) {
+                        console.log('Pushing ' + color);
+                        this.colorsArray.push(color);
+                    }
                 }
             }
         }
         console.log('Initialized ');
         this.filteredTags = _.cloneDeep(this.tagsArray);
+        this.filteredColors = _.cloneDeep(this.colorsArray);
         console.log('Filtered Array: ');
         console.log(this.filteredTags);
     }
 
     private tagUpdate() {
-        let filteredArray: Tag[];
-        filteredArray = [];
+        let filteredArray: string[] = [];
         for (const item of this.filteredClothes) {
             for (const tag of item.tags) {
-                const tagInstance: Tag = { name: tag };
-                filteredArray.push(tagInstance);
+                if (!filteredArray.includes(tag)) {
+                    console.log('Now Pushing ' + tag);
+                    filteredArray.push(tag);
+                }
+            }
+        }
+        return filteredArray;
+    }
+
+    private colorsUpdate() {
+        let filteredArray: string[] = [];
+        for (const item of this.filteredClothes) {
+            for (const color of item.colors) {
+                if (!filteredArray.includes(color)) {
+                    console.log('Now Pushing ' + color);
+                    filteredArray.push(color);
+                }
             }
         }
         return filteredArray;
@@ -99,7 +120,8 @@ export class ListComponent implements OnInit {
 
     private applyFilters() {
         this.filteredClothes = _.filter( this.closet, _.conforms(this.filters) );
-        this.filteredTags = this.tagUpdate();
+        this.filteredTags = _.cloneDeep(this.tagUpdate());
+        this.filteredColors = _.cloneDeep(this.colorsUpdate());
     }
 
     private applyTagFilters(tag: any) {
@@ -108,17 +130,33 @@ export class ListComponent implements OnInit {
                 let removetag;
                 for (const x of i.tags) {
                     if (x === tag) {
-                        console.log('Tag: ' + x);
+                        console.log('Removing Tag: ' + x);
                         removetag = true;
                     } 
                 }
                 if (!removetag){return i;}
-                console.log('Filtered!');
+                console.log('Filtered by Tag!');
             }
         );
     }
 
-    /// filter property by equality to rule
+    private applyColorFilters(color: any) {
+        this.filteredClothes = this.filteredClothes.filter(
+            function(i) {
+                let removecolor;
+                for (const x of i.colors) {
+                    if (x === color) {
+                        console.log('Removing Color: ' + x);
+                        removecolor = true;
+                    } 
+                }
+                if (!removecolor){return i;}
+                console.log('Filtered by Color!');
+            }
+        );
+    }
+
+    // Filter for filtering clothing by category.
     filterExact(property: string, rule: any) {
         this.filters[property] = val => val === rule;
         this.applyFilters();
@@ -127,88 +165,27 @@ export class ListComponent implements OnInit {
     removeFilters() {
         this.filteredClothes = this.closet;
         this.filteredTags = _.cloneDeep(this.tagsArray);
+        this.filteredColors = _.cloneDeep(this.colorsArray);
     }
 
     // Function to remove tag.
-    remove(tag: Tag): void {
+    remove(tag: string): void {
         const index = this.filteredTags.indexOf(tag);
 
         if (index >= 0) {
             this.filteredTags.splice(index, 1);
         }
 
-        console.log('Original Array:');
-        console.log(this.tagsArray);
-        this.applyTagFilters(tag.name);
+        this.applyTagFilters(tag);
     }
 
+    removeColor(color: string): void {
+        const index = this.filteredColors.indexOf(color);
 
-/* 
-    filter() {
-        this.api.getClothing().subscribe(data => {
-        this.closet = data.map(e => {
-            return {name: e.payload.doc.id,
-                    ...e.payload.doc.data()
-                } as ClothingItem;
-            });
-        });
+        if (index >= 0) {
+            this.filteredColors.splice(index, 1);
+        }
 
-        var filter;
-
-        // Check what tag is clicked.
-        if ((<HTMLInputElement>document.getElementById('Accessories')).checked) {
-            filter = 'Accessory';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Bags')).checked) {
-            filter = 'Bag';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Dresses')).checked) {
-            filter = 'Dresses';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Intimates & Sleepwear')).checked) {
-            filter = 'Intimates & Sleepwear';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Jackets & Coats')).checked) {
-            filter = 'Jackets & Coats';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Jeans')).checked) {
-            filter = 'Jeans';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Jewelry')).checked) {
-            filter = 'Jewelry';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Pants')).checked) {
-            filter = 'Pants';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Shoes')).checked) {
-            filter = 'Shoes';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Shorts')).checked) {
-            filter = 'Shorts';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Skirts')).checked) {
-            filter = 'Skirts';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Sweaters')).checked) {
-            filter = 'Sweater';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Swim')).checked) {
-            filter = 'Swim';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Shirts')).checked) {
-            filter = 'Shirt';
-        }
-        else if ((<HTMLInputElement>document.getElementById('Other')).checked) {
-            filter = 'Other';
-        } */
-
-        /*for (var i = 0; i < this.closet.length; i++) {
-            if (this.closet[i].category != filter) {
-                this.closet.splice(i, 1);
-                i--;
-            }
-        }
-    }*/
-
-
+        this.applyColorFilters(color);
+    }
 }

@@ -55,7 +55,7 @@ export class UploadComponent implements OnInit {
   colors = [];
 
   // Default image
-  imgUrl: String = "../../../assets/image-upload-icon.png";
+  imgUrl: String = "../../../assets/image-upload-pic.png";
 
   constructor(private api: ApiService, private fb: FormBuilder, 
     private clothingService: ClothingService, private router: Router, private storage: AngularFireStorage) { 
