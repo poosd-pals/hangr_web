@@ -122,6 +122,15 @@
     display: block;
     text-align: center;
   }
+
+ p.card-text {
+      margin: .5%;
+  }
+
+p.category-text {
+    font-weight: bold;
+    margin-bottom: 1%;
+}
   
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover {
