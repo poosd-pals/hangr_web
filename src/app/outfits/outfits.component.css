@@ -34,3 +34,12 @@
 .card-deck {
     margin-left: .8%;
 }
+
+p.card-text {
+    margin: .5%;
+}
+
+p.category-text {
+  font-weight: bold;
+  margin-bottom: 1%;
+}

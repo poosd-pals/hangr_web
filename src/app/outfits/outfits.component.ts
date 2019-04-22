@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Constants } from './../constants/constants';
 import { ClothingItem } from '../closet/clothing-model';
 import { ApiService } from './../api/api.service';
+import { OutfitsService } from '../api/outfits/outfits.service';
 
 @Component({
   selector: 'app-outfits',
@@ -20,7 +21,7 @@ export class OutfitsComponent implements OnInit {
   filteredList: ClothingItem[] = [];
   outfitList: ClothingItem[] = [];
 
-  constructor(private api:ApiService) {
+  constructor(private api:ApiService, private outfitsService:OutfitsService) {
    }
 
   ngOnInit() {
@@ -30,7 +31,6 @@ export class OutfitsComponent implements OnInit {
                   ...e.payload.doc.data()
               } as ClothingItem;
           });
-          console.log(this.clothesList);
       });
   }
 
@@ -64,9 +64,6 @@ export class OutfitsComponent implements OnInit {
   addToOutfit(clothingItem) {
     this.outfitList.push(clothingItem);
 
-    for (let clothingItem of this.outfitList)
-    console.log(clothingItem);
-
     this.showFilteredList = false;
 
     this.showDropDown = true;
@@ -76,6 +73,11 @@ export class OutfitsComponent implements OnInit {
   }
 
   wear() {
-    
+    this.outfitsService.wearOutfit({outfitList: this.outfitList});
+
+    for (let clothingItem of this.clothesList)
+      console.log(clothingItem);
+
+    window.location.reload();
   }
 }
