@@ -7,6 +7,7 @@ import { auth } from  'firebase/app';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Observable } from 'rxjs';
+import { ClothingItem } from 'src/app/closet/clothing-model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,8 @@ export class ClothingService {
   private currentUser;
   // private db = firebase.firestore();
   // accountLogs: Observable<ClothingItemId[]>;
+  private editClothing: ClothingItem = null;
+
   constructor(private firestore: AngularFirestore) {
     this.currentUser = JSON.parse(localStorage.getItem('user'));
     // this.clothingItemCollection = afs.collection<ClothingItem>('clothing');
@@ -33,6 +36,17 @@ export class ClothingService {
 
   uploadClothing(data) {
     
+  }
+
+  passDataToEdit(currentClothing: ClothingItem) {
+    console.log("current clothing: ");
+    console.log(currentClothing);
+
+    this.editClothing = currentClothing;
+  }
+
+  getEditClothing() {
+    return this.editClothing;
   }
 
   deleteClothing(data) {

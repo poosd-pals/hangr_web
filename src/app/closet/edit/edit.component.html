@@ -1,0 +1,126 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="card content">
+    <h1>Edit Clothing</h1>
+
+  <form [formGroup]="clothingForm" (ngSubmit)="onSubmit(tags, colors)">
+    <div class="row">
+      <div class="col-md-5 photo">
+      <button class="fileButton" type="button" (click)="clothingImageUpload.click()">
+        <img [src]="imageUrl">
+      </button>
+        <input type="file" #clothingImageUpload (change)="processFile($event)" accept=".png,.jpg" style="display: none;" />
+      </div>
+      <div class="col-md nameAndCategory">
+        <div class="row">
+          <label>
+            Name:
+            <br>
+            <mat-form-field>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <!--<input type="text" formControlName="name">-->
+            <div *ngIf="submitted && clothingForm.controls.name.errors" class="error">
+              <div *ngIf="clothingForm.controls.name.errors.required">Clothing name is required</div>
+            </div>
+          </label>
+        </div>
+        <div class="row">
+            <label>
+                Category:
+                <br>
+                <mat-form-field>
+                    <select matNativeControl required (change)="selectChangeHandler($event)">
+                        <option *ngFor="let category of categories">{{category}} </option>  
+                  </select>
+                </mat-form-field>
+                <!--<mat-form-field>
+                    <input matInput formControlName="category">
+                </mat-form-field>
+                <input type="text" formControlName="category">-->
+            </label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row longRow">
+        <label>
+            Wears Before Wash:
+            <br>
+            <mat-form-field>
+                <input matInput formControlName="wearsBeforeWash">
+            </mat-form-field>
+            <!--<input type="text" formControlName="wearsBeforeWash">-->
+            <div *ngIf="submitted && clothingForm.controls.wearsBeforeWash.errors" class="error">
+              <div *ngIf="clothingForm.controls.wearsBeforeWash.errors.required">Wears before wash is required</div>
+            </div>
+
+          </label>
+    </div>
+    
+    <div class="row longRow">
+        <label>
+            Colors:
+            <br>
+              <div class="mat-app-background basic-container">
+                <mat-form-field class="chip-list">
+                  <mat-chip-list #colorsList>
+                    <mat-chip *ngFor="let color of colors" 
+                              [selectable]="selectable"
+                              [removable]="removable" 
+                              (removed)="removeColor(color)">
+                              {{color.name}}
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input [matChipInputFor]="colorsList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="addOnBlur"
+                           (matChipInputTokenEnd)="addColor($event)">
+                  </mat-chip-list>
+                </mat-form-field>
+              </div>
+          </label>
+    </div>
+
+    <div class="row longRow">
+        <label>
+            Tags:
+            <br>
+            <div class="mat-app-background basic-container">
+              <mat-form-field class="chip-list">
+                <mat-chip-list #tagsList>
+                  <mat-chip *ngFor="let tag of tags" 
+                            [selectable]="selectable"
+                            [removable]="removable" 
+                            (removed)="removeTag(tag)">
+                            {{tag.name}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input [matChipInputFor]="tagsList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="addTag($event)">
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+          </label>
+    </div>
+
+    <div class="row longRow">
+      
+          <button type="submit" class="btn btn-info">Submit</button>
+      
+          <button type="button" class="btn btn-info">
+            <a href="/closet/list"> Cancel </a>
+          </button>
+      
+    </div>
+  </form>
+
+</div>
+
+<p class="debug">
+    Form Value: {{ clothingForm.value | json }}
+</p>
+
+

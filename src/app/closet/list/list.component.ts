@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ApiService } from './../../api/api.service';
+import { ClothingService } from './../../api/clothing/clothing.service';
 import { ClothingItem } from '../clothing-model';
 import { Constants } from '../../constants/constants';
 
@@ -37,7 +38,7 @@ export class ListComponent implements OnInit {
     filteredClothes: ClothingItem[];
 
     // Constructor sets the api to the one in ApiService.
-    constructor( private api: ApiService ) {
+    constructor( private api: ApiService, private clothingService: ClothingService ) {
         this.addButtonLongText = false;
 
         this.tagsArray = [];
@@ -187,5 +188,11 @@ export class ListComponent implements OnInit {
         }
 
         this.applyColorFilters(color);
+    }
+
+    goToEdit(currentClothing: ClothingItem) {
+        console.log("in goToEdit!");
+
+        this.clothingService.passDataToEdit(currentClothing);
     }
 }
