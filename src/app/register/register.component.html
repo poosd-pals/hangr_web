@@ -6,7 +6,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-4 text-center">
-              <img src="https://image.flaticon.com/icons/png/512/47/47687.png">
+              <img src="../assets/login-logo.png">
             </div>
             <div class="col-md-8">
               <form
@@ -15,7 +15,7 @@
                 <input type="text" formControlName="username"  class="form-control mb-2" placeholder="Username" #userName required autofocus>
                 <input type="text" formControlName="email"  class="form-control mb-2" placeholder="Email" #userEmail required autofocus>
                 <input type="password" formControlName="password" class="form-control mb-2" placeholder="Password"  #userPassword required>
-                <button class="btn btn-lg btn-primary btn-block mb-1"
+                <button class="myButton btn btn-lg btn-primary btn-block mb-1"
                 (click)="authService.register(form)">
                   Register
                 </button>
