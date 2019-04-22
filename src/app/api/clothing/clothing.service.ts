@@ -46,8 +46,8 @@ export class ClothingService {
   saveClothing(data) {
     console.log(data.imageUrl);
     if (data.imageUrl == undefined || data.imageUrl == null || data.imageUrl.length == 0) {
-      data.imageUrl = 'assets/image-upload-icon.png';
-      data.imageFilename = 'image-upload-icon.png';
+      data.imageUrl = 'assets/image-placeholder.jpg';
+      data.imageFilename = 'image-placeholder.jpg';
     }
     if (data.clothing.id == null || data.clothing.id.length == 0) {
       return new Promise<any>((resolve, reject) =>{
@@ -68,6 +68,10 @@ export class ClothingService {
       });
     }
     else {
+      if (data.imageUrl == undefined || data.imageUrl == null || data.imageUrl.length == 0) {
+        data.imageUrl = 'assets/image-placeholder.jpg';
+        data.imageFilename = 'image-placeholder.jpg';
+      }
       return new Promise<any>((resolve, reject) =>{
         this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(data.clothing.id).update({
               name: data.clothing.name,
