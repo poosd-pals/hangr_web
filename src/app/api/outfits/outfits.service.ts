@@ -19,16 +19,15 @@ export class OutfitsService {
   saveOutfit(data) {
     //validate clothing
     var localClothingItems = [];
-    data.clothingRefs.map(clothingRef => {
-      this.firestore.collection('clothing').doc(clothingRef.id).get().subscribe(data => {
-        localClothingItems.push(clothingRef.id);
+    data.outfitList.map(clothingItem => {
+      this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(clothingItem.id).get().subscribe(data => {
+        localClothingItems.push(clothingItem.id);
       }, error => console.log('no such doc'));
     });
-    if (data.docRef == null) {
+    if (data.clothingItem.id == null || data.clothingItem.id.length > 0) {
       return new Promise<any>((resolve, reject) =>{
-        this.firestore.collection('outfits')
+        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits')
             .add({
-              uid: this.currentUser.uid,
               // dateCreated: new Date(),
               name: data.name,
               clothingItems: localClothingItems,
@@ -40,8 +39,7 @@ export class OutfitsService {
     }
     else {
       return new Promise<any>((resolve, reject) =>{
-        data.docRef.update({
-          uid: this.currentUser.uid,
+        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits').doc(data.clothingItem.id).update({
           // dateCreated: new Date(),
           name: data.name,
           clothingItems: localClothingItems,
@@ -54,18 +52,18 @@ export class OutfitsService {
 
   deleteOutfit(data) {
     return new Promise<any>((resolve, reject) =>{
-      data.docRef.delete()
+      this.firestore.collection('outfits').doc(data.clothingItem.id).delete()
           .then(res => {}, err => reject(err));
 
     });
   }
 
   wearOutfit(data) {
-    data.clothingRefs.map(clothingRef => {
-      this.firestore.collection('clothing').doc(clothingRef.id).get().subscribe(data => {
+    data.outfitList.map(clothingItem => {
+      this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(clothingItem.id).get().subscribe(data => {
         var clothingData = data.data();
-        this.firestore.collection('clothing').doc(clothingRef.id).ref.update({
-          wearsLeft: clothingData.wearsLeft > 0 ? clothingData.wearsLeft - 1 : -1
+        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(clothingItem.id).update({
+          wearsLeft: clothingData.wearsLeft > 0 ? clothingData.wearsLeft - 1 : (clothingData.wearsLeft == 0 ? 0 : -1)
         })
       })
     });

@@ -68,6 +68,7 @@ export class UploadComponent implements OnInit {
 
     // Instantiate instance of clothing
     this.clothing = {
+        id: '',
         name: '',
         category: '',
         wearsTotal: 1,

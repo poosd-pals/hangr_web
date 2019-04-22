@@ -60,7 +60,7 @@ export class ListComponent implements OnInit {
     ngOnInit() {
         this.api.getClothing().subscribe(data => {
             this.closet = data.map(e => {
-                return {name: e.payload.doc.id,
+                return {id: e.payload.doc.id,
                         ...e.payload.doc.data()
                     } as ClothingItem;
                 });

@@ -36,7 +36,7 @@ export class ClothingService {
 
   deleteClothing(data) {
     return new Promise<any>((resolve, reject) =>{
-      data.docRef.delete()
+      this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(data.clothingItem.id).delete()
           .then(res => {}, err => reject(err));
 
     });
@@ -44,12 +44,10 @@ export class ClothingService {
 
   saveClothing(data) {
     console.log(data.imageUrl);
-    if (data.docRef == null) {
+    if (data.clothingItem.id == null || data.clothingItem.id.length == 0) {
       return new Promise<any>((resolve, reject) =>{
-        this.firestore.collection('clothing')
+        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items')
             .add({
-              uid: this.currentUser.uid,
-              // dateCreated: new Date(),
               name: data.clothing.name,
               category: data.clothing.category,
               imageUrl: data.imageUrl,
@@ -65,8 +63,7 @@ export class ClothingService {
     }
     else {
       return new Promise<any>((resolve, reject) =>{
-        data.docRef.update({
-          uid: this.currentUser.uid,
+        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(data.clothingItem.id).update({
               name: data.clothing.name,
               category: data.clothing.category,
               imageUrl: data.imageUrl,

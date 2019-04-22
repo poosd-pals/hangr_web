@@ -1,4 +1,5 @@
 export interface ClothingItem {
+    id: string
     name: string;
     category: string;
     wearsTotal: number;

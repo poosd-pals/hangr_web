@@ -42,7 +42,7 @@ export class ApiService {
 
     getClothing() {
         var currentUser = JSON.parse(localStorage.getItem('user'));
-        return this.firestore.collection('clothing', ref => ref.where('uid', '==', currentUser.uid)).snapshotChanges();
+        return this.firestore.collection('hangr').doc(currentUser.uid).collection('clothing_items').snapshotChanges();
     }
 
 

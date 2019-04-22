@@ -26,10 +26,11 @@ export class OutfitsComponent implements OnInit {
   ngOnInit() {
     this.api.getClothing().subscribe(data => {
       this.clothesList = data.map(e => {
-          return {name: e.payload.doc.id,
+          return {id: e.payload.doc.id,
                   ...e.payload.doc.data()
               } as ClothingItem;
           });
+          console.log(this.clothesList);
       });
   }
 

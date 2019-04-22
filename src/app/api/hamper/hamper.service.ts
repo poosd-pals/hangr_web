@@ -22,15 +22,15 @@ export class HamperService {
 
   getHamper() {
       var dirtyClothes = [];
-      return this.firestore.collection('clothing', ref => ref.where('wearsLeft', '==', 0).where('uid', '==', this.currentUser.uid)).snapshotChanges();
+      return this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items', ref => ref.where('wearsLeft', '==', 0)).snapshotChanges();
   }
 
   cleanItem(docRefData) {
     var docData;
     var self = this;
-     this.firestore.collection('clothing').doc(docRefData.id).snapshotChanges().subscribe(data=> {
+    this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(docRefData.id).snapshotChanges().subscribe(data=> {
        docData = data.payload.data();
-       this.firestore.collection('clothing').doc(docRefData.id).update({
+       this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(docRefData.id).update({
          wearsLeft: docData.wearsTotal
       });
       
