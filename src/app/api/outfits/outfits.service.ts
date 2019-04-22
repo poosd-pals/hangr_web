@@ -4,7 +4,8 @@ import {
 } from '@angular/fire/firestore';
 import { User } from  'firebase';
 import { auth } from  'firebase/app';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -24,11 +25,11 @@ export class OutfitsService {
         localClothingItems.push(clothingItem.id);
       }, error => console.log('no such doc'));
     });
-    if (data.clothingItem.id == null || data.clothingItem.id.length > 0) {
+    if (data.clothingItem.id == null || data.clothingItem.id.length == 0) {
       return new Promise<any>((resolve, reject) =>{
         this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits')
             .add({
-              // dateCreated: new Date(),
+              dateCreated: firebase.firestore.FieldValue.serverTimestamp(),
               name: data.name,
               clothingItems: localClothingItems,
               favorite: data.favorite
@@ -52,7 +53,7 @@ export class OutfitsService {
 
   deleteOutfit(data) {
     return new Promise<any>((resolve, reject) =>{
-      this.firestore.collection('outfits').doc(data.clothingItem.id).delete()
+      this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits').doc(data.clothingItem.id).delete()
           .then(res => {}, err => reject(err));
 
     });

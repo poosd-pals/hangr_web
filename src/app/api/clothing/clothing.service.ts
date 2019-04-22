@@ -4,7 +4,8 @@ import {
 } from '@angular/fire/firestore';
 import { User } from  'firebase';
 import { auth } from  'firebase/app';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -44,10 +45,14 @@ export class ClothingService {
 
   saveClothing(data) {
     console.log(data.imageUrl);
-    if (data.clothingItem.id == null || data.clothingItem.id.length == 0) {
+    if (data.imageUrl == undefined || data.imageUrl == null || data.imageUrl.length == 0) {
+      data.imageUrl = 'src/assets/image-upload-icon.png';
+    }
+    if (data.clothing.id == null || data.clothing.id.length == 0) {
       return new Promise<any>((resolve, reject) =>{
         this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items')
             .add({
+              dateCreated: firebase.firestore.FieldValue.serverTimestamp(),
               name: data.clothing.name,
               category: data.clothing.category,
               imageUrl: data.imageUrl,
@@ -63,7 +68,7 @@ export class ClothingService {
     }
     else {
       return new Promise<any>((resolve, reject) =>{
-        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(data.clothingItem.id).update({
+        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(data.clothing.id).update({
               name: data.clothing.name,
               category: data.clothing.category,
               imageUrl: data.imageUrl,
