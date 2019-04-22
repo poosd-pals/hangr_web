@@ -5,9 +5,13 @@ import { ClothingItem } from '../clothing-model';
 import { Constants } from '../../constants/constants';
 
 import * as _ from 'lodash';
+import { TagContentType } from '@angular/compiler';
 
-export interface Tag {
+export class Tag {
     name: string;
+
+    constructor( name: string ) {
+        this.name = name; }
   }
 
 @Component({
@@ -21,16 +25,14 @@ export class ListComponent implements OnInit {
     // Booleans for tags.
     selectable = true;
     removable = true;
+    filled = false;
+
+    // Empty array 'tags' of objects type 'Tag'
+    tagsArray: Tag[];
+    filteredTags: Tag[];
 
     // long text is the "add clothing" text when the button is expanded.
     addButtonLongText: boolean;
-
-    // TO BE DELETED: Temporary array of tags.
-    tags: Tag[] = [
-        {name: 'Casual'},
-        {name: 'Business'},
-        {name: 'Summer'},
-      ];
 
     // Set categories list to the ones defined in constants.
     categories = Constants.categories;
@@ -40,45 +42,107 @@ export class ListComponent implements OnInit {
     filteredClothes: ClothingItem[];
 
     // Constructor sets the api to the one in ApiService.
-    constructor(private api: ApiService) {
+    constructor( private api: ApiService ) {
         this.addButtonLongText = false;
+
+        this.tagsArray = [];
+        this.filteredTags = [];
     }
 
     // filter-able properties
     category: string;
+    tags: string[];
 
     // Active filter rules
     filters = {}
 
     // Returns data from firebase mapped to an array of objects type 'ClothingItem'
     ngOnInit() {
-    this.api.getClothing().subscribe(data => {
-        this.closet = data.map(e => {
-            return {name: e.payload.doc.id,
-                    ...e.payload.doc.data()
-                } as ClothingItem;
+        this.api.getClothing().subscribe(data => {
+            this.closet = data.map(e => {
+                return {name: e.payload.doc.id,
+                        ...e.payload.doc.data()
+                    } as ClothingItem;
+                });
+            this.applyFilters();
+            this.tagFill();
             });
-        this.applyFilters();
-        });
+    }
+
+    private tagFill() {
+        if (typeof this.closet !== 'undefined' && this.filled === false) {
+            this.filled = true;
+            for (const item of this.closet) {
+                for (const tag of item.tags) {
+                    const tagInstance: Tag = { name: tag };
+                    this.tagsArray.push(tagInstance);
+                }
+            }
+        }
+        console.log('Initialized ');
+        this.filteredTags = _.cloneDeep(this.tagsArray);
+        console.log('Filtered Array: ');
+        console.log(this.filteredTags);
+    }
+
+    private tagUpdate() {
+        let filteredArray: Tag[];
+        filteredArray = [];
+        for (const item of this.filteredClothes) {
+            for (const tag of item.tags) {
+                const tagInstance: Tag = { name: tag };
+                filteredArray.push(tagInstance);
+            }
+        }
+        return filteredArray;
     }
 
     private applyFilters() {
-        this.filteredClothes = _.filter(this.closet, _.conforms(this.filters) )
-      }
-      /// filter property by equality to rule
+        this.filteredClothes = _.filter( this.closet, _.conforms(this.filters) );
+        this.filteredTags = this.tagUpdate();
+    }
+
+    private applyTagFilters(tag: any) {
+        this.filteredClothes = this.filteredClothes.filter(
+            function(i) {
+                let removetag;
+                for (const x of i.tags) {
+                    if (x === tag) {
+                        console.log('Tag: ' + x);
+                        removetag = true;
+                    } 
+                }
+                if (!removetag){return i;}
+                console.log('Filtered!');
+            }
+        );
+    }
+
+    /// filter property by equality to rule
     filterExact(property: string, rule: any) {
-        this.filters[property] = val => val == rule
-        this.applyFilters()
+        this.filters[property] = val => val === rule;
+        this.applyFilters();
+    }
+
+    removeFilters() {
+        this.filteredClothes = this.closet;
+        this.filteredTags = _.cloneDeep(this.tagsArray);
     }
 
     // Function to remove tag.
     remove(tag: Tag): void {
-        const index = this.tags.indexOf(tag);
+        const index = this.filteredTags.indexOf(tag);
 
         if (index >= 0) {
-            this.tags.splice(index, 1);
+            this.filteredTags.splice(index, 1);
         }
+
+        console.log('Original Array:');
+        console.log(this.tagsArray);
+        this.applyTagFilters(tag.name);
     }
+
+
 /* 
     filter() {
         this.api.getClothing().subscribe(data => {
