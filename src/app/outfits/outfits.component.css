@@ -10,20 +10,27 @@
 
 .card.content {
     background-color: transparent;
-    padding: 1%;
-}
-
-
-.btn {
-    width: 15%;
+    padding: 2%;
 }
 
 .longRow {
     margin-left: .2%;
   }
 
-.btn-submit {
+.btn-select {
+    margin-top: 3.2%;
     margin-left: 2%;
     width: 10%;
     height: .8%;
+}
+
+.btn-wear {
+    margin-top: 3.2%;
+    margin-left: 1%;
+    width: 10%;
+    height: .8%;
+}
+
+.card-deck {
+    margin-left: .8%;
 }

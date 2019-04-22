@@ -2,7 +2,8 @@
   <h1>Assemble an Outfit!</h1>
 
   <div class="card content">
-      <div class="row longRow" *ngIf="showDropDown===true" class="">
+      <!--View for "Select a category"-->
+      <div class="row longRow" *ngIf="showDropDown===true">
         <label>
           Category
           <br>
@@ -13,16 +14,43 @@
             </select>
           </mat-form-field>
         </label>
+
         <button type="button" 
                 (click)="filterByCategory()" 
-                class="btn btn-info btn-sm btn-submit">
+                class="btn btn-info btn-sm btn-select">
                 Select clothing
+        </button>
+
+        <button [disabled]="outfitList.length === 0" 
+                type="button" 
+                (click)="wear()" 
+                class="btn btn-outline-dark btn-sm btn-wear">
+                Wear
         </button>
     </div>
 
+    <!--Display items from selected category-->
     <div class ="row">
-        <div class="card-deck">
-          <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let clothingItem of clothesList">
+        <div class="card-deck" *ngIf="showFilteredList===true">
+          <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let clothingItem of filteredList">
+              <div class="card mx-auto text-center" >
+                  <img class="card-img-top" src="{{ clothingItem.imageUrl }}" alt="Card image cap">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ clothingItem.name }}</h5>
+                      <p class="card-text">{{ clothingItem.category }}</p>
+                      <button type="button" (click)="addToOutfit(clothingItem)" class="btn btn-info btn-sm btn-add">
+                        Select
+                      </button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    <!--Display items added to current outfit-->
+    <div class ="row">
+        <div class="card-deck" *ngIf="showOutfitList===true">
+          <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let clothingItem of outfitList">
               <div class="card mx-auto text-center" >
                   <img class="card-img-top" src="{{ clothingItem.imageUrl }}" alt="Card image cap">
                   <div class="card-body">
@@ -33,4 +61,5 @@
           </div>
         </div>
       </div>
+  </div>
 </div>

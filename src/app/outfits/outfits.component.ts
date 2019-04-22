@@ -13,22 +13,17 @@ export class OutfitsComponent implements OnInit {
   selectedCategory: string;
 
   showDropDown: boolean = true;
+  showFilteredList: boolean = false;
+  showOutfitList: boolean = true;
 
-  clothesList: ClothingItem[];
+  clothesList: ClothingItem[] = [];
+  filteredList: ClothingItem[] = [];
+  outfitList: ClothingItem[] = [];
 
   constructor(private api:ApiService) {
    }
 
   ngOnInit() {
-  }
-
-  filterByCategory()
-  {
-    if  (this.selectedCategory == null)
-      return;
-
-    this.showDropDown = false;
-
     this.api.getClothing().subscribe(data => {
       this.clothesList = data.map(e => {
           return {name: e.payload.doc.id,
@@ -36,13 +31,50 @@ export class OutfitsComponent implements OnInit {
               } as ClothingItem;
           });
       });
+  }
 
-    
+  // Adds clothingItems that match the current selected category to a filteredList.
+  filterByCategory()
+  {
+    if  (this.selectedCategory == null)
+      return;
 
-    console.log("selected category: " + this.selectedCategory);
+    this.showDropDown = false;
+    this.showOutfitList = false;
+
+    // Make sure the filteredList is initially empty.
+    this.filteredList = [];
+
+    for (let clothingItem of this.clothesList)
+    {
+      if (clothingItem.category === this.selectedCategory)
+      {
+        this.filteredList.push(clothingItem);
+      }
+    }
+
+    this.showFilteredList = true;
   }
 
   selectChangeHandler (event: any) {
     this.selectedCategory = event.target.value;
+  }
+
+  addToOutfit(clothingItem) {
+    this.outfitList.push(clothingItem);
+
+    for (let clothingItem of this.outfitList)
+    console.log(clothingItem);
+
+    this.showFilteredList = false;
+
+    this.showDropDown = true;
+    this.showOutfitList = true;
+
+    this.selectedCategory = null;
+  }
+
+  wear() {
+    
   }
 }
