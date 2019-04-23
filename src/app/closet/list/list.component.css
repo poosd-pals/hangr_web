@@ -10,7 +10,7 @@
 }
 
 .card {
-    height: 38vw;
+    height: 32vw;
 }
 
 .card-deck {
@@ -19,6 +19,10 @@
 
 .card-body {
     padding: 5%;
+}
+
+.card-header {
+    background-color: #d8cec4;
 }
 
 .card-img-top {
@@ -128,6 +132,12 @@
     text-align: center;
   }
 
+  .sidenav-divider {
+        height: 10px;
+        border: 0;
+        box-shadow: 0 10px 10px -10px #8c8b8b inset;
+  }
+
 p.card-text {
       margin: .5%;
   }
@@ -161,6 +171,8 @@ p.category-text {
   mat-divider {
       padding-bottom: 15px;
   }
+
+
   /* END SIDEBAR STYLING */
 
   /* BEGIN BUTTON STYLING */
@@ -204,3 +216,4 @@ p.category-text {
 	top:1px;
 }
 /* END BUTTON STYLING */
+

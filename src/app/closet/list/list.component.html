@@ -26,8 +26,8 @@
 
     <div class="colorList">
         <mat-chip-list #chipList>
-            <mat-chip *ngFor="let color of filteredColors" [selectable]="selectable"
-                (click)="selectColor(color)"> {{ color }}
+            <mat-chip *ngFor="let color of filteredColors" [selectable]="selectable" (select)="selectable"
+                (click)="selectColor(color.name)"> {{ color.name }}
             </mat-chip>
         </mat-chip-list>
     </div>
@@ -60,12 +60,11 @@
     <div class ="row">
         <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let item of filteredClothes">
             <div class="card mx-auto text-center" >
+                <div class="card-header mb-4">{{ item.name }}</div>
                 <img class="card-img-top" src="{{ item.imageUrl }}" alt="Card image cap">
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ item.name }}</h5>
+                    <!-- <h5 class="card-title">{{ item.name }}</h5> -->
                     <p class="card-text category-text">{{ item.category }}</p>
-                    <p class="card-text" *ngFor="let tag of item.tags">{{ tag }}</p>
-                    <p class="card-text" >Wears Left: {{ item.wearsLeft }}</p>
                     <div class="mt-auto">
                         <a class="card-text float-right text-muted mt-auto" routerLink="/closet/edit">
                             <button type="button" 

@@ -8,6 +8,10 @@ import { Constants } from '../../constants/constants';
 import * as _ from 'lodash';
 import { TagContentType } from '@angular/compiler';
 
+export interface ColorsBoolean {
+    name: string;
+    selected: boolean;
+}
 
 @Component({
   selector: 'app-list',
@@ -28,8 +32,8 @@ export class ListComponent implements OnInit {
     // Empty array 'tags' of objects type 'Tag'
     tagsArray: string[];
     filteredTags: string[];
-    colorsArray: string[];
-    filteredColors: string[];
+    colorsBooleans: ColorsBoolean[];
+    filteredColors: ColorsBoolean[];
 
     // long text is the "add clothing" text when the button is expanded.
     addButtonLongText: boolean;
@@ -47,8 +51,8 @@ export class ListComponent implements OnInit {
 
         this.tagsArray = [];
         this.filteredTags = [];
-        this.colorsArray = [];
         this.filteredColors = [];
+        this.colorsBooleans = [];
     }
 
     // filter-able properties
@@ -83,18 +87,21 @@ export class ListComponent implements OnInit {
                     }
                 }
                 for (const color of item.colors) {
-                    if(!this.colorsArray.includes(color)) {
-                        console.log('Pushing ' + color);
-                        this.colorsArray.push(color);
+                    const colorInstance: ColorsBoolean = { name: color, selected: false };
+                    let added = false;
+                    for (const bool of this.colorsBooleans) {
+                        if (bool.name === color) {
+                            added = true;
+                        }
+                    }
+                    if (!added) {
+                        this.colorsBooleans.push(colorInstance);
                     }
                 }
             }
         }
-        console.log('Initialized ');
         this.filteredTags = _.cloneDeep(this.tagsArray);
-        this.filteredColors = _.cloneDeep(this.colorsArray);
-        console.log('Filtered Array: ');
-        console.log(this.filteredTags);
+        this.filteredColors = _.cloneDeep(this.colorsBooleans);
     }
 
     private tagUpdate() {
@@ -111,12 +118,18 @@ export class ListComponent implements OnInit {
     }
 
     private colorsUpdate() {
-        let filteredArray: string[] = [];
+        let filteredArray: ColorsBoolean[] = [];
         for (const item of this.filteredClothes) {
             for (const color of item.colors) {
-                if (!filteredArray.includes(color)) {
-                    console.log('Now Pushing ' + color);
-                    filteredArray.push(color);
+                const colorInstance: ColorsBoolean = { name: color, selected: false };
+                let added = false;
+                for (const bool of this.colorsBooleans) {
+                    if (bool.name === color) {
+                        added = true;
+                    }
+                }
+                if (!added) {
+                    this.colorsBooleans.push(colorInstance);
                 }
             }
         }
@@ -168,7 +181,7 @@ export class ListComponent implements OnInit {
     removeFilters() {
         this.filteredClothes = this.closet;
         this.filteredTags = _.cloneDeep(this.tagsArray);
-        this.filteredColors = _.cloneDeep(this.colorsArray);
+        this.filteredColors = _.cloneDeep(this.colorsBooleans);
 
         this.resetRadioButtons();
     }
@@ -185,6 +198,11 @@ export class ListComponent implements OnInit {
     }
 
     selectColor(color: string): void {
+        for (const items of this.filteredColors) {
+            if (items.name === color) {
+                items.selected = true;
+            }
+        }
         this.applyColorFilters(color);
     }
 
