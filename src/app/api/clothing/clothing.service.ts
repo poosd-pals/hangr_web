@@ -51,7 +51,7 @@ export class ClothingService {
 
   deleteClothing(data) {
     return new Promise<any>((resolve, reject) =>{
-      this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(data.clothingItem.id).delete()
+      this.firestore.collection('hangr').doc(this.currentUser.uid).collection('clothing_items').doc(data.id).delete()
           .then(res => {}, err => reject(err));
 
     });

@@ -3,6 +3,7 @@ import { Constants } from './../constants/constants';
 import { ClothingItem } from '../closet/clothing-model';
 import { ApiService } from './../api/api.service';
 import { OutfitsService } from '../api/outfits/outfits.service';
+import { ClosetService } from '../api/closet/closet.service';
 
 @Component({
   selector: 'app-outfits',
@@ -21,11 +22,11 @@ export class OutfitsComponent implements OnInit {
   filteredList: ClothingItem[] = [];
   outfitList: ClothingItem[] = [];
 
-  constructor(private api:ApiService, private outfitsService:OutfitsService) {
+  constructor(private api:ApiService, private outfitsService:OutfitsService, private closetService:ClosetService) {
    }
 
   ngOnInit() {
-    this.api.getClothing().subscribe(data => {
+    this.closetService.getCleanClothing().subscribe(data => {
       this.clothesList = data.map(e => {
           return {id: e.payload.doc.id,
                   ...e.payload.doc.data()
@@ -65,6 +66,10 @@ export class OutfitsComponent implements OnInit {
     this.outfitList.push(clothingItem);
 
     this.back();
+  }
+
+  removeFromOutfit(clothingItem: ClothingItem, index: number) {
+    this.outfitList.splice(index, 1);
   }
 
   wear() {

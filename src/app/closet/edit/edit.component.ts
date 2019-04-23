@@ -64,7 +64,7 @@ export class EditComponent implements OnInit {
     
       this.clothingForm = this.fb.group({
       name: [this.clothing.name, Validators.required],
-      wearsBeforeWash: [this.clothing.wearsTotal, Validators.required],
+      wearsBeforeWash: [this.clothing.wearsTotal, Validators.compose([Validators.min(1), Validators.required])],
       colors: [this.clothing.colors],
       tags: [this.clothing.tags]
     });
@@ -124,39 +124,6 @@ export class EditComponent implements OnInit {
   }
   }
 
-  onSubmit(tags, colors) {
-    this.submitted = true;
-
-    if (this.clothingForm.invalid){
-        return;
-    }
-
-    this.clothingForm.patchValue({ colors: this.colors.map(color => color.name) });
-    this.clothingForm.patchValue({ tags: this.tags.map(tag => tag.name) });
-
-    this.success = true;
-
-    // TODO: Make this into a for loop for readability. Maybe.
-    this.clothing.name = this.clothingForm.controls['name'].value;
-    this.clothing.category = this.selectedCategory;
-    this.clothing.wearsTotal = this.clothingForm.controls['wearsBeforeWash'].value;
-    this.clothing.wearsLeft = this.clothing.wearsTotal;
-    this.clothing.tags = this.clothingForm.controls['tags'].value;
-    this.clothing.colors = this.clothingForm.controls['colors'].value;
-
-    this.clothingService.saveClothing({
-      docRef: this.currentDocRef,
-      clothing: this.clothing,
-      imageUrl: this.imageUrl,
-      imageFilename: this.fileName
-    });
-    // this.api.addClothing(this.clothing);
-
-    console.log("form submitted!");
-
-    this.router.navigate(['/closet/list']);
-  }
-
   // Chip functions
   addTag(event: MatChipInputEvent): void {
     const input = event.input;
@@ -203,5 +170,43 @@ export class EditComponent implements OnInit {
       this.colors.splice(index, 1);
     }
   }
+
+  onSubmit(tags, colors) {
+    this.submitted = true;
+
+    if (this.clothingForm.invalid){
+        return;
+    }
+
+    this.clothingForm.patchValue({ colors: this.colors.map(color => color.name) });
+    this.clothingForm.patchValue({ tags: this.tags.map(tag => tag.name) });
+
+    this.success = true;
+
+    // TODO: Make this into a for loop for readability. Maybe.
+    this.clothing.name = this.clothingForm.controls['name'].value;
+    this.clothing.category = this.selectedCategory;
+    this.clothing.wearsTotal = this.clothingForm.controls['wearsBeforeWash'].value;
+    this.clothing.wearsLeft = this.clothing.wearsTotal;
+    this.clothing.tags = this.clothingForm.controls['tags'].value;
+    this.clothing.colors = this.clothingForm.controls['colors'].value;
+
+    this.clothingService.saveClothing({
+      docRef: this.currentDocRef,
+      clothing: this.clothing,
+      imageUrl: this.imageUrl,
+      imageFilename: this.fileName
+    });
+
+    this.router.navigate(['/closet/list']);
+  }
+
+  deleteClothing() {
+    if (confirm("Are you sure you want to delete " + this.clothing.name + "?")) {
+      this.clothingService.deleteClothing( { id: this.clothing.id } );
+      this.router.navigate(['/closet/list'])
+    }
+  }
+
 }
 
