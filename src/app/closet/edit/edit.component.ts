@@ -203,6 +203,8 @@ export class EditComponent implements OnInit {
 
   deleteClothing() {
     if (confirm("Are you sure you want to delete " + this.clothing.name + "?")) {
+      // Delete image from storage
+      
       this.clothingService.deleteClothing( { id: this.clothing.id } );
       this.router.navigate(['/closet/list'])
     }

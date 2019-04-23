@@ -95,7 +95,7 @@ export class UploadComponent implements OnInit {
       }
       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
       const file = (<HTMLInputElement>event.target).files[0];
-      this.fileName = file.name;
+      this.fileName = `${new Date().getTime()}_${file.name}`;
 
       var currentUser = JSON.parse(localStorage.getItem('user'));
 
