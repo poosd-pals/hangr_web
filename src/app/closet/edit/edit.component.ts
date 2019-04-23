@@ -205,6 +205,9 @@ export class EditComponent implements OnInit {
     if (confirm("Are you sure you want to delete " + this.clothing.name + "?")) {
       // Delete image from storage
       
+      var currentUser = JSON.parse(localStorage.getItem('user'));
+      this.storage.ref(`${currentUser.uid}/${this.clothing.imageFilename}`).delete();
+
       this.clothingService.deleteClothing( { id: this.clothing.id } );
       this.router.navigate(['/closet/list'])
     }
