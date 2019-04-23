@@ -31,7 +31,10 @@
                 <br>
                 <mat-form-field>
                     <select matNativeControl required (change)="selectChangeHandler($event)">
-                        <option *ngFor="let category of categories">{{category}} </option>  
+                        <option *ngFor="let category of categories" 
+                                [selected]="category == selectedCategory"> 
+                                {{category}} 
+                        </option>  
                   </select>
                 </mat-form-field>
                 <!--<mat-form-field>

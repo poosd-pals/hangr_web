@@ -27,7 +27,7 @@ export class EditComponent implements OnInit {
 
   // drop down list categories
   categories = Constants.categories;
-  selectedCategory: string = '';
+  selectedCategory: string;
   
   // form stuff
   clothingForm: FormGroup;
@@ -83,13 +83,15 @@ export class EditComponent implements OnInit {
     // Copy the current imageUrl
     this.imageUrl = this.clothing.imageUrl;
     this.fileName = this.clothing.imageFilename;
+
+    // Copy the category
+    this.selectedCategory = this.clothing.category;
   }
 
   ngOnInit() {
   }
 
   selectChangeHandler (event: any) {
-    console.log("colors array: " + this.colors);
     this.selectedCategory = event.target.value;
   }
 
@@ -134,8 +136,6 @@ export class EditComponent implements OnInit {
 
     this.success = true;
 
-    console.log("tags value: " + this.clothingForm.controls['tags'].value);
-
     // TODO: Make this into a for loop for readability. Maybe.
     this.clothing.name = this.clothingForm.controls['name'].value;
     this.clothing.category = this.selectedCategory;
@@ -144,8 +144,6 @@ export class EditComponent implements OnInit {
     this.clothing.tags = this.clothingForm.controls['tags'].value;
     this.clothing.colors = this.clothingForm.controls['colors'].value;
 
-    // console.log("this.clothing value: " + JSON.stringify(this.clothing));
-    // console.log(this.currentDocRef);
     this.clothingService.saveClothing({
       docRef: this.currentDocRef,
       clothing: this.clothing,
