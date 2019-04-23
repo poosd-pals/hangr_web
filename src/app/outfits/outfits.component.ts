@@ -68,6 +68,10 @@ export class OutfitsComponent implements OnInit {
     this.back();
   }
 
+  removeFromOutfit(clothingItem: ClothingItem, index: number) {
+    this.outfitList.splice(index, 1);
+  }
+
   wear() {
     this.outfitsService.wearOutfit({outfitList: this.outfitList});
 
