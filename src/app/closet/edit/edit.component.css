@@ -103,8 +103,6 @@ input {
 .btn-delete {
   position: absolute;
   right: 0%;
-  color: red;
-  background-color: transparent;
 }
 
 a {

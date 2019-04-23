@@ -69,7 +69,7 @@
                     <div class="mt-auto">
                         <p class="card-text float-left text-muted mt-auto">
                             <mat-chip-list *ngIf="item.wearsLeft === 0">
-                                <mat-chip class="dirty-chip" color="warn">
+                                <mat-chip class="dirty-chip" [selectable]="false">
                                     Dirty
                                 </mat-chip>
                             </mat-chip-list>
