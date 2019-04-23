@@ -64,7 +64,9 @@ export class EditComponent implements OnInit {
     
       this.clothingForm = this.fb.group({
       name: [this.clothing.name, Validators.required],
-      wearsBeforeWash: [this.clothing.wearsTotal, Validators.compose([Validators.min(1), Validators.required])],
+      wearsBeforeWash: [this.clothing.wearsTotal, Validators.compose([Validators.min(1), 
+                                                                      Validators.pattern("^[0-9]*$"),
+                                                                      Validators.required])],
       colors: [this.clothing.colors],
       tags: [this.clothing.tags]
     });

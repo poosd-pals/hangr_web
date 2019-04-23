@@ -14,6 +14,8 @@ export class HamperComponent implements OnInit {
   currentDocRef = null;
   clothingItems = [];
 
+  isLoaded: Promise<boolean>;
+
   constructor(private hamperService: HamperService) {
   }
 
@@ -24,10 +26,9 @@ export class HamperComponent implements OnInit {
                     ...e.payload.doc.data()
                 } as ClothingItem;
             });
-        console.log(this.clothingItems);
-        });
 
-        console.log(this.clothingItems);
+          this.isLoaded = Promise.resolve(true);
+        });
 
     // To access hamper item data, it is this.clothingItems[i].data. Then use . operator to access fields
 /*     this.hamperService.getHamper().subscribe(data => {

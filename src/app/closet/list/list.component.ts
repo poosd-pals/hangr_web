@@ -26,6 +26,9 @@ export class ListComponent implements OnInit {
     removable = true;
     filled = false;
 
+    // Check if list is loaded
+    isLoaded: Promise<boolean>;
+
     // Controls Radio Buttons
     categoryModel = null;
 
@@ -69,6 +72,8 @@ export class ListComponent implements OnInit {
                 return {id: e.payload.doc.id,
                         ...e.payload.doc.data()
                     } as ClothingItem;
+
+                    this.isLoaded = Promise.resolve(true);
                 });
             this.applyFilters();
             this.tagFill();
