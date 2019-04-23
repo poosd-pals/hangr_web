@@ -12,7 +12,7 @@
     <div class="sidenav-categories">
         <form action="">
             <div class="category list" *ngFor="let category of categories">
-               <input type="radio" [(ngModel)]="category" (change)="filterExact('category', category)" 
+               <input type="radio" [(ngModel)]="categoryModel" (change)="filterExact('category', category)" 
                     id="{{ category }}" name="itemCategory" value="{{ category }}"> {{ category }}<br>
             </div>
         </form>
@@ -27,8 +27,7 @@
     <div class="colorList">
         <mat-chip-list #chipList>
             <mat-chip *ngFor="let color of filteredColors" [selectable]="selectable"
-                [removable]="removable" (removed)="removeColor(color)"> {{ color }}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                (click)="selectColor(color)"> {{ color }}
             </mat-chip>
         </mat-chip-list>
     </div>
@@ -48,9 +47,8 @@
 
     <!-- Submit button -->
     <div class="sidenav-submit">
-        <button mat-raised-button (click)="removeFilters()">Remove Filters</button>
+            <button mat-raised-button (click)="removeFilters()">Remove Filters</button>
     </div>
-
 
 </div>
 <!-- Ends contents of the Sidebar -->
@@ -72,7 +70,7 @@
                         <a class="card-text float-right text-muted mt-auto" routerLink="/closet/edit">
                             <button type="button" 
                                     (click)="goToEdit(item)" 
-                                    class="btn btn-info btn-sm btn-edit">
+                                    class="myButton btn btn-info btn-sm btn-edit">
                                     Edit
                             </button>
                         </a>

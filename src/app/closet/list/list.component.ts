@@ -8,6 +8,7 @@ import { Constants } from '../../constants/constants';
 import * as _ from 'lodash';
 import { TagContentType } from '@angular/compiler';
 
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -20,6 +21,9 @@ export class ListComponent implements OnInit {
     selectable = true;
     removable = true;
     filled = false;
+
+    // Controls Radio Buttons
+    categoryModel = null;
 
     // Empty array 'tags' of objects type 'Tag'
     tagsArray: string[];
@@ -144,14 +148,12 @@ export class ListComponent implements OnInit {
     private applyColorFilters(color: any) {
         this.filteredClothes = this.filteredClothes.filter(
             function(i) {
-                let removecolor;
                 for (const x of i.colors) {
                     if (x === color) {
-                        console.log('Removing Color: ' + x);
-                        removecolor = true;
-                    } 
+                        console.log('Has Color: ' + x);
+                        return i;
+                    }
                 }
-                if (!removecolor){return i;}
                 console.log('Filtered by Color!');
             }
         );
@@ -167,6 +169,8 @@ export class ListComponent implements OnInit {
         this.filteredClothes = this.closet;
         this.filteredTags = _.cloneDeep(this.tagsArray);
         this.filteredColors = _.cloneDeep(this.colorsArray);
+
+        this.resetRadioButtons();
     }
 
     // Function to remove tag.
@@ -180,13 +184,7 @@ export class ListComponent implements OnInit {
         this.applyTagFilters(tag);
     }
 
-    removeColor(color: string): void {
-        const index = this.filteredColors.indexOf(color);
-
-        if (index >= 0) {
-            this.filteredColors.splice(index, 1);
-        }
-
+    selectColor(color: string): void {
         this.applyColorFilters(color);
     }
 
@@ -195,4 +193,7 @@ export class ListComponent implements OnInit {
 
         this.clothingService.passDataToEdit(currentClothing);
     }
+
+    resetRadioButtons() { this.categoryModel = null; }
+
 }

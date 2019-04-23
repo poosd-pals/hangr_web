@@ -2,8 +2,6 @@
 <div class="container" style="margin-top:10px">
         
     <div class ="row">
-
-    <!-- <div class="card-deck"> -->
         <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let item of clothingItems">
             <div class="card mx-auto text-center" >
                 <img class="card-img-top" src="{{ item.imageUrl }}" alt="Card image cap">
@@ -11,12 +9,13 @@
                     <h5 class="card-title">{{ item.name }}</h5>
                     <p class="card-text category-text">{{ item.category }}</p>
                     <p class="card-text" *ngFor="let tag of item.tags">{{ tag }}</p>
-                    <button type="button" (click)="clean(item)" class="btn btn-info btn-sm btn-edit">Clean</button>
+                    <div class="mt-auto">
+                        <button type="button" class="myButton float-right btn btn-info btn-sm btn-edit" (click)="clean(item)">Clean</button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
-    <!-- </div> -->
-
     </div>
 
 </div>
