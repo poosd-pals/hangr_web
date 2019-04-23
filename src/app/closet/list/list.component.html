@@ -20,6 +20,7 @@
 
     <!-- End Category List -->
 
+    <!-- Begin Color List-->
     <p>Colors</p>
 
     <mat-divider></mat-divider>
@@ -31,7 +32,9 @@
             </mat-chip>
         </mat-chip-list>
     </div>
+    <!-- End Color List -->
 
+    <!-- Begin Tag List -->
     <p>Tags</p>
 
     <mat-divider></mat-divider>
@@ -44,6 +47,7 @@
             </mat-chip>
         </mat-chip-list>
     </div>
+    <!-- End Tag List -->
 
     <!-- Submit button -->
     <div class="sidenav-submit">
@@ -88,8 +92,9 @@
     <!-- Ends iterating through clothing in cards -->
 
     <div class="empty-container">
-            <p *ngIf="closet.length==0" class="empty-text">Closet is empty!</p>
+            <img *ngIf="closet.length==0" src="../../../assets/empty-closet.png" class="empty-text">
     </div>
+
 </div>
 <!-- Ends Contents of the Main List -->
 
