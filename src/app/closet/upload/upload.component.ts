@@ -44,7 +44,8 @@ export class UploadComponent implements OnInit {
 
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
-  fileName: string;
+  fileName: string = '';
+  oldFileName: string = '';
   imageUrl: string;
 
   // Enter, comma
@@ -97,9 +98,13 @@ export class UploadComponent implements OnInit {
       }
       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
       const file = (<HTMLInputElement>event.target).files[0];
+      this.oldFileName = this.fileName;
       this.fileName = `${new Date().getTime()}_${file.name}`;
 
       var currentUser = JSON.parse(localStorage.getItem('user'));
+
+      if (this.fileName !== this.oldFileName && this.oldFileName.length > 0)
+        this.storage.ref(`${currentUser.uid}/${this.oldFileName}`).delete();
 
       const filePath = `${currentUser.uid}/${new Date().getTime()}_${file.name}`;
     const fileRef = this.storage.ref(filePath);

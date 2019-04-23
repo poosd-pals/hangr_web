@@ -44,8 +44,9 @@ export class EditComponent implements OnInit {
 
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
-  fileName: string;
+  fileName: string = '';
   imageUrl: string;
+  oldFileName: string = '';
 
   // Enter, comma
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -105,9 +106,14 @@ export class EditComponent implements OnInit {
       }
       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
       const file = (<HTMLInputElement>event.target).files[0];
-      this.fileName = file.name;
+
+      this.oldFileName = this.fileName;
+      this.fileName = `${new Date().getTime()}_${file.name}`;
 
       var currentUser = JSON.parse(localStorage.getItem('user'));
+
+      if (this.fileName !== this.oldFileName && this.oldFileName.length > 0)
+        this.storage.ref(`${currentUser.uid}/${this.oldFileName}`).delete();
 
       const filePath = `${currentUser.uid}/${new Date().getTime()}_${file.name}`;
     const fileRef = this.storage.ref(filePath);
@@ -192,6 +198,8 @@ export class EditComponent implements OnInit {
     this.clothing.wearsLeft = this.clothing.wearsTotal;
     this.clothing.tags = this.clothingForm.controls['tags'].value;
     this.clothing.colors = this.clothingForm.controls['colors'].value;
+
+    var currentUser = JSON.parse(localStorage.getItem('user'));
 
     this.clothingService.saveClothing({
       docRef: this.currentDocRef,
