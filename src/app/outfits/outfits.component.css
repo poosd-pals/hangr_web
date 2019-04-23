@@ -35,6 +35,12 @@
     height: .8%;
 }
 
+.btn-remove {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
+
 .card.mx-auto {
     height: 32vw;
 }
