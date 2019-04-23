@@ -67,6 +67,13 @@
                     <p class="card-text" *ngFor="let tag of item.tags">{{ tag }}</p>
                     <p class="card-text" >Wears Left: {{ item.wearsLeft }}</p>
                     <div class="mt-auto">
+                        <p class="card-text float-left text-muted mt-auto">
+                            <mat-chip-list *ngIf="item.wearsLeft === 0">
+                                <mat-chip color="warn">
+                                    Dirty
+                                </mat-chip>
+                            </mat-chip-list>
+                        </p>
                         <a class="card-text float-right text-muted mt-auto" routerLink="/closet/edit">
                             <button type="button" 
                                     (click)="goToEdit(item)" 

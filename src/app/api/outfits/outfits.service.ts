@@ -25,7 +25,7 @@ export class OutfitsService {
         localClothingItems.push(clothingItem.id);
       }, error => console.log('no such doc'));
     });
-    if (data.clothingItem.id == null || data.clothingItem.id.length == 0) {
+    if (data.outfit.id == null || data.outfit.id.length == 0) {
       return new Promise<any>((resolve, reject) =>{
         this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits')
             .add({
@@ -40,7 +40,7 @@ export class OutfitsService {
     }
     else {
       return new Promise<any>((resolve, reject) =>{
-        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits').doc(data.clothingItem.id).update({
+        this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits').doc(data.outfit.id).update({
           // dateCreated: new Date(),
           name: data.name,
           clothingItems: localClothingItems,
@@ -53,7 +53,7 @@ export class OutfitsService {
 
   deleteOutfit(data) {
     return new Promise<any>((resolve, reject) =>{
-      this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits').doc(data.clothingItem.id).delete()
+      this.firestore.collection('hangr').doc(this.currentUser.uid).collection('outfits').doc(data.id).delete()
           .then(res => {}, err => reject(err));
 
     });
