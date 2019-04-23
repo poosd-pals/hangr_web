@@ -73,7 +73,7 @@ export class OutfitsComponent implements OnInit {
     for (let clothingItem of this.clothesList)
       console.log(clothingItem);
 
-    window.location.reload();
+    this.outfitList = [];
   }
 
   back() {
