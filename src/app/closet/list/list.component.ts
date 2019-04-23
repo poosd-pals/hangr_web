@@ -42,7 +42,7 @@ export class ListComponent implements OnInit {
     categories = Constants.categories;
 
     // Empty array 'closet' of objects type 'ClothingItem'
-    closet: ClothingItem[];
+    closet: ClothingItem[] = [];
     filteredClothes: ClothingItem[];
 
     // Constructor sets the api to the one in ApiService.

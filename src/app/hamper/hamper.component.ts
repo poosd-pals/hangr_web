@@ -18,7 +18,6 @@ export class HamperComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.hamperService.getHamper().subscribe(data => {
         this.clothingItems = data.map(e => {
             return {id: e.payload.doc.id,
@@ -27,6 +26,8 @@ export class HamperComponent implements OnInit {
             });
         console.log(this.clothingItems);
         });
+
+        console.log(this.clothingItems);
 
     // To access hamper item data, it is this.clothingItems[i].data. Then use . operator to access fields
 /*     this.hamperService.getHamper().subscribe(data => {
