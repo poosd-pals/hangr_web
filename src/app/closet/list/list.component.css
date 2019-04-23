@@ -215,5 +215,11 @@ p.category-text {
 	position:relative;
 	top:1px;
 }
+
 /* END BUTTON STYLING */
+
+.dirty-chip {
+    color: white !important;
+    background-color: #dc3545 !important;
+}
 
