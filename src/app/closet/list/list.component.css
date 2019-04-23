@@ -203,4 +203,8 @@ p.category-text {
 	position:relative;
 	top:1px;
 }
+.dirty-chip {
+    color: white !important;
+    background-color: #dc3545 !important;
+}
 /* END BUTTON STYLING */
