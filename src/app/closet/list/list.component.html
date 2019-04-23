@@ -47,7 +47,7 @@
 
     <!-- Submit button -->
     <div class="sidenav-submit">
-            <button mat-raised-button (click)="removeFilters()">Remove Filters</button>
+            <button mat-raised-button (click)="removeFilters()">Reset Filters</button>
     </div>
 
 </div>
@@ -87,6 +87,9 @@
     </div>
     <!-- Ends iterating through clothing in cards -->
 
+    <div class="empty-container">
+            <p *ngIf="closet.length==0" class="empty-text">Closet is empty!</p>
+    </div>
 </div>
 <!-- Ends Contents of the Main List -->
 
