@@ -9,23 +9,15 @@
 
     <mat-divider></mat-divider>
 
-<!--     <div class="sidenav-categories">
+    <div class="sidenav-categories">
         <form action="">
             <div class="category list" *ngFor="let category of categories">
                <input type="radio" [(ngModel)]="category" (change)="filterExact('category', category)" 
                     id="{{ category }}" name="itemCategory" value="{{ category }}"> {{ category }}<br>
             </div>
         </form>
-    </div> -->
-
-    <div class="sidenav-categories">
-        <form action="">
-            <div class="category list" *ngFor="let item of categories">
-               <input type="radio" [(ngModel)]="category" (change)="filterExact('category', item)" 
-                    id="{{ category }}" name="itemCategory" value="{{ item }}"> {{ item }}<br>
-            </div>
-        </form>
     </div>
+
     <!-- End Category List -->
 
     <p>Colors</p>
@@ -54,15 +46,6 @@
         </mat-chip-list>
     </div>
 
-<!--     <div class="colorList">
-        <mat-chip-list #chipList>
-            <mat-chip *ngFor="let tag of anArray" [selectable]="selectable"
-                [removable]="removable" (removed)="remove(tag)"> {{ tag }}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-        </mat-chip-list>
-    </div> -->
-
     <!-- Submit button -->
     <div class="sidenav-submit">
         <button mat-raised-button (click)="removeFilters()">Remove Filters</button>
@@ -76,7 +59,7 @@
 <div class="main">
 
     <!-- Iterates through clothing in cards -->
-    <div class ="row"><div class="card-deck">
+    <div class ="row">
         <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let item of filteredClothes">
             <div class="card mx-auto text-center" >
                 <img class="card-img-top" src="{{ item.imageUrl }}" alt="Card image cap">
@@ -84,6 +67,7 @@
                     <h5 class="card-title">{{ item.name }}</h5>
                     <p class="card-text category-text">{{ item.category }}</p>
                     <p class="card-text" *ngFor="let tag of item.tags">{{ tag }}</p>
+                    <p class="card-text" >Wears Left: {{ item.wearsLeft }}</p>
                     <div class="mt-auto">
                         <a class="card-text float-right text-muted mt-auto" routerLink="/closet/edit">
                             <button type="button" 
@@ -96,7 +80,7 @@
                 </div>
             </div>
         </div>
-    </div></div>
+    </div>
     <!-- Ends iterating through clothing in cards -->
 
 </div>

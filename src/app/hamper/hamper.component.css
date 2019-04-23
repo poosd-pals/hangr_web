@@ -1,0 +1,22 @@
+.hamper-content {
+    padding-left: auto;
+    padding-right: auto;
+}
+
+.card {
+    height: 38vw;
+}
+
+.card-deck {
+    margin-top: 2em;
+}
+
+.card-body {
+    padding: 5%;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 20vw;
+    object-fit: scale-down;
+}
