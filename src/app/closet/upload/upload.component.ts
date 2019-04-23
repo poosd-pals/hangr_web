@@ -27,7 +27,7 @@ export class UploadComponent implements OnInit {
 
   // drop down list categories
   categories = Constants.categories;
-  selectedCategory: string = '';
+  selectedCategory: string = Constants.categories[0];
   
   // form stuff
   clothingForm: FormGroup;
