@@ -61,8 +61,7 @@ export class UploadComponent implements OnInit {
     private clothingService: ClothingService, private router: Router, private storage: AngularFireStorage) {
     this.clothingForm = this.fb.group({
       name: ['', Validators.required],
-      wearsBeforeWash: ['', Validators.compose(
-        [Validators.min(1), Validators.required])],
+      wearsBeforeWash: ['', Validators.compose([Validators.min(1), Validators.required])],
       colors: [],
       tags: []
     });
