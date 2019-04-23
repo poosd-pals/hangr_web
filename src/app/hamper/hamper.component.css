@@ -62,3 +62,14 @@
 	top:1px;
 }
 /* END BUTTON STYLING */
+
+.empty-container {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+p.empty-text {
+	margin-top: 17%;
+}

@@ -12,10 +12,13 @@
                     <div class="mt-auto">
                         <button type="button" class="myButton float-right btn btn-info btn-sm btn-edit" (click)="clean(item)">Clean</button>
                     </div>
-                    
                 </div>
             </div>
         </div>
     </div>
 
+</div>
+
+<div class="empty-container">
+    <p *ngIf="clothingItems.length==0" class="empty-text">Hamper is empty!</p>
 </div>
