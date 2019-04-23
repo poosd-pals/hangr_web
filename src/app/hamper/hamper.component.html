@@ -20,5 +20,5 @@
 </div>
 
 <div class="empty-container">
-    <p *ngIf="clothingItems.length==0" class="empty-text">Hamper is empty!</p>
+    <p *ngIf="isLoaded && clothingItems.length==0" class="empty-text">Hamper is empty!</p>
 </div>
