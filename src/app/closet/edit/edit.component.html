@@ -56,6 +56,9 @@
             <!--<input type="text" formControlName="wearsBeforeWash">-->
             <div *ngIf="submitted && clothingForm.controls.wearsBeforeWash.errors" class="error">
               <div *ngIf="clothingForm.controls.wearsBeforeWash.errors.required">Wears before wash is required</div>
+              <div *ngIf="!clothingForm.controls.wearsBeforeWash.errors.required && 
+                          clothingForm.controls.wearsBeforeWash.errors">Wears before wash must be a numeric value > 0
+              </div>
             </div>
 
           </label>
