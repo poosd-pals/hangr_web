@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   form: FormGroup;
   submitted: boolean = false;
 
-  constructor(private  authService:  AuthService) { }
+  constructor(public  authService:  AuthService) { }
 
   ngOnInit() {
     this.form = new FormGroup({

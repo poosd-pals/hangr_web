@@ -12,7 +12,7 @@ import { AuthService } from  '../auth/auth.service';
 export class RegisterComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private  authService:  AuthService) { }
+  constructor(public  authService:  AuthService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
