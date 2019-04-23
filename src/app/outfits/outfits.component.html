@@ -40,12 +40,15 @@
           <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let clothingItem of filteredList">
               <div class="card mx-auto text-center" >
                   <img class="card-img-top" src="{{ clothingItem.imageUrl }}" alt="Card image cap">
-                  <div class="card-body">
+                  <div class="card-body d-flex flex-column">
                       <h5 class="card-title">{{ clothingItem.name }}</h5>
                       <p class="card-text category-text">{{ clothingItem.category }}</p>
-                      <button type="button" (click)="addToOutfit(clothingItem)" class="btn btn-info btn-sm btn-add">
-                        Select
-                      </button>
+                      <div class="mt-auto">
+                        <button type="button" (click)="addToOutfit(clothingItem)" 
+                                class="btn btn-info btn-sm btn-add float-right mt-auto">
+                          Select
+                        </button>
+                      </div>
                   </div>
               </div>
           </div>
