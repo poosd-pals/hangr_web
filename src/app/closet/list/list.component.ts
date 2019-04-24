@@ -72,11 +72,11 @@ export class ListComponent implements OnInit {
                 return {id: e.payload.doc.id,
                         ...e.payload.doc.data()
                     } as ClothingItem;
-
-                    this.isLoaded = Promise.resolve(true);
                 });
             this.applyFilters();
             this.tagFill();
+
+            this.isLoaded = Promise.resolve(true);
             });
     }
 
