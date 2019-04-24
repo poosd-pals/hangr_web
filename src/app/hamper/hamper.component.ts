@@ -48,8 +48,6 @@ export class HamperComponent implements OnInit {
   }
 
   clean(item){
-
-    console.log("Cleaning!")
     this.hamperService.cleanItem(item);
   }
 }

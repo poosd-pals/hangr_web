@@ -39,7 +39,6 @@ export class AuthService {
         return -1;
     }
 
-    console.log(form.value);
     return 0;
   }
 
@@ -50,14 +49,11 @@ export class AuthService {
       result = await this.afAuth.auth.createUserWithEmailAndPassword(form.get('email').value, form.get('password').value)
       .then ( success=> {
         // For debugging purposes.
-        // console.log("current user before: " + JSON.stringify(firebase.auth().currentUser));
         firebase.auth().currentUser.updateProfile({
           displayName: form.get('username').value,
         }).then(function() {
           // Update successful.
           console.log("Update user name successful");
-          // For debugging purposes.
-          // console.log("display name: " + firebase.auth().currentUser.displayName);
         }).catch(function(error) {
           // An error happened.
           console.log("ERROR: Was unable to update user name");

@@ -39,9 +39,6 @@ export class ClothingService {
   }
 
   passDataToEdit(currentClothing: ClothingItem) {
-    console.log("current clothing: ");
-    console.log(currentClothing);
-
     this.editClothing = currentClothing;
   }
 
@@ -58,7 +55,6 @@ export class ClothingService {
   }
 
   saveClothing(data) {
-    console.log(data.imageUrl);
     if (data.imageUrl == undefined || data.imageUrl == null || data.imageUrl.length == 0) {
       data.imageUrl = '';
       data.imageFilename = '';

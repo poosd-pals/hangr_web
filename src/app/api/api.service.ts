@@ -44,32 +44,4 @@ export class ApiService {
         var currentUser = JSON.parse(localStorage.getItem('user'));
         return this.firestore.collection('hangr').doc(currentUser.uid).collection('clothing_items').snapshotChanges();
     }
-
-
-
-/*   addClothing (clothingForm: FormGroup){
-    // TODO: change URL
-    this.http.post('https://my-json-server.typicode.com/winterchocolatte/demo/clothings',
-    {
-      name: clothingForm.controls['name'].value,
-      category: clothingForm.controls['category'].value,
-      wearsBeforeWash: clothingForm.controls['wearsBeforeWash'].value,
-      colors : clothingForm.controls['colors'].value,
-      tags: clothingForm.controls['tags'].value
-    })
-    .subscribe(
-      (data:any) => {
-        console.log(data);
-      }
-    )
-  } */
-
-
-    // Jin
-/*   getClothing(){
-    // TODO: change this
-    return this.http.get('https://my-json-server.typicode.com/winterchocolatte/demo/clothings');
-  } */
-
-
 }

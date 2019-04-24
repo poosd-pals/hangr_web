@@ -75,9 +75,6 @@ export class OutfitsComponent implements OnInit {
   wear() {
     this.outfitsService.wearOutfit({outfitList: this.outfitList});
 
-    for (let clothingItem of this.clothesList)
-      console.log(clothingItem);
-
     this.outfitList = [];
   }
 

@@ -117,27 +117,18 @@ export class UploadComponent implements OnInit {
         finalize(() => { this.downloadURL = fileRef.getDownloadURL(); this.downloadURL.subscribe(url=>{this.imageUrl = url});})
      )
     .subscribe()
-
-      //this.afStorage.upload('/upload/to/this-path', (<HTMLInputElement>event.target).files[0]);
-      console.log((<HTMLInputElement>event.target).files[0]);
   }
   }
 
   onSubmit(tags, colors) {
     this.submitted = true;
 
-    console.log("selected category: " + this.selectedCategory);
-
     if (this.clothingForm.invalid){
         return;
     }
 
-    console.log(this.clothingForm);
-
     this.clothingForm.patchValue({ colors: this.colors.map(color => color.name) });
     this.clothingForm.patchValue({ tags: this.tags.map(tag => tag.name) });
-
-    console.log(this.clothingForm.value);
 
     this.success = true;
 
@@ -149,18 +140,12 @@ export class UploadComponent implements OnInit {
     this.clothing.tags = this.clothingForm.controls['tags'].value;
     this.clothing.colors = this.clothingForm.controls['colors'].value;
 
-    console.log("this.clothing value: " + JSON.stringify(this.clothing));
-    console.log(this.currentDocRef);
     this.clothingService.saveClothing({
       docRef: this.currentDocRef,
       clothing: this.clothing,
       imageUrl: this.imageUrl,
       imageFilename: this.fileName
     });
-    // this.api.addClothing(this.clothing);
-
-    // TODO: Send to Firebase
-    console.log("form submitted!");
 
     this.router.navigate(['/closet/list']);
   }

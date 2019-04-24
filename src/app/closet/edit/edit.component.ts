@@ -75,7 +75,6 @@ export class EditComponent implements OnInit {
     // Copy the colors and tags array of the clothing to be edited to the
     // temporary arrays in the current component.
     for (let color of this.clothing.colors){
-      console.log(color);
       this.colors.push({'name': color});
     }
      
@@ -126,9 +125,6 @@ export class EditComponent implements OnInit {
         finalize(() => { this.downloadURL = fileRef.getDownloadURL(); this.downloadURL.subscribe(url=>{this.imageUrl = url});})
      )
     .subscribe()
-
-      //this.afStorage.upload('/upload/to/this-path', (<HTMLInputElement>event.target).files[0]);
-      console.log((<HTMLInputElement>event.target).files[0]);
   }
   }
 
