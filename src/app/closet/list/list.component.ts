@@ -87,7 +87,6 @@ export class ListComponent implements OnInit {
             for (const item of this.closet) {
                 for (const tag of item.tags) {
                     if (!this.tagsArray.includes(tag)) {
-                        console.log('Pushing ' + tag);
                         this.tagsArray.push(tag);
                     }
                 }
@@ -110,11 +109,10 @@ export class ListComponent implements OnInit {
     }
 
     private tagUpdate() {
-        let filteredArray: string[] = [];
+        const filteredArray: string[] = [];
         for (const item of this.filteredClothes) {
             for (const tag of item.tags) {
                 if (!filteredArray.includes(tag)) {
-                    console.log('Now Pushing ' + tag);
                     filteredArray.push(tag);
                 }
             }
@@ -123,22 +121,26 @@ export class ListComponent implements OnInit {
     }
 
     private colorsUpdate() {
-        let filteredArray: ColorsBoolean[] = [];
+        const filteredArray: ColorsBoolean[] = [];
         for (const item of this.filteredClothes) {
             for (const color of item.colors) {
                 const colorInstance: ColorsBoolean = { name: color, selected: false };
                 let added = false;
-                for (const bool of this.colorsBooleans) {
+                for (const bool of filteredArray) {
                     if (bool.name === color) {
                         added = true;
+                        console.log('Array has this color.');
                     }
                 }
                 if (!added) {
-                    this.colorsBooleans.push(colorInstance);
+                    filteredArray.push(colorInstance);
+                    console.log('Pushing ' + color);
                 }
             }
         }
+        console.log(filteredArray);
         return filteredArray;
+        
     }
 
     private applyFilters() {
@@ -153,12 +155,10 @@ export class ListComponent implements OnInit {
                 let removetag;
                 for (const x of i.tags) {
                     if (x === tag) {
-                        console.log('Removing Tag: ' + x);
                         removetag = true;
-                    } 
+                    }
                 }
-                if (!removetag){return i;}
-                console.log('Filtered by Tag!');
+                if (!removetag) { return i; }
             }
         );
     }
@@ -168,11 +168,9 @@ export class ListComponent implements OnInit {
             function(i) {
                 for (const x of i.colors) {
                     if (x === color) {
-                        console.log('Has Color: ' + x);
                         return i;
                     }
                 }
-                console.log('Filtered by Color!');
             }
         );
     }
@@ -212,8 +210,6 @@ export class ListComponent implements OnInit {
     }
 
     goToEdit(currentClothing: ClothingItem) {
-        console.log("in goToEdit!");
-
         this.clothingService.passDataToEdit(currentClothing);
     }
 
