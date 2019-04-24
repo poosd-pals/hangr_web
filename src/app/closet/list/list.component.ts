@@ -37,6 +37,7 @@ export class ListComponent implements OnInit {
     filteredTags: string[];
     colorsBooleans: ColorsBoolean[];
     filteredColors: ColorsBoolean[];
+    selectedColors: string[];
 
     // long text is the "add clothing" text when the button is expanded.
     addButtonLongText: boolean;
@@ -56,6 +57,7 @@ export class ListComponent implements OnInit {
         this.filteredTags = [];
         this.filteredColors = [];
         this.colorsBooleans = [];
+        this.selectedColors = [];
     }
 
     // filter-able properties
@@ -129,18 +131,14 @@ export class ListComponent implements OnInit {
                 for (const bool of filteredArray) {
                     if (bool.name === color) {
                         added = true;
-                        console.log('Array has this color.');
                     }
                 }
                 if (!added) {
                     filteredArray.push(colorInstance);
-                    console.log('Pushing ' + color);
                 }
             }
         }
-        console.log(filteredArray);
         return filteredArray;
-        
     }
 
     private applyFilters() {
@@ -149,31 +147,21 @@ export class ListComponent implements OnInit {
         this.filteredColors = _.cloneDeep(this.colorsUpdate());
     }
 
-    private applyTagFilters(tag: any) {
+    private applyTagFilters(){
+        let tempArray = _.cloneDeep(this.filteredTags);
+
         this.filteredClothes = this.filteredClothes.filter(
             function(i) {
-                let removetag;
-                for (const x of i.tags) {
-                    if (x === tag) {
-                        removetag = true;
+                for (const x of tempArray) {
+                    for (const eachTag of i.tags) {
+                        if( x === eachTag )
+                        { return i; }
                     }
                 }
-                if (!removetag) { return i; }
             }
         );
     }
 
-    private applyColorFilters(color: any) {
-        this.filteredClothes = this.filteredClothes.filter(
-            function(i) {
-                for (const x of i.colors) {
-                    if (x === color) {
-                        return i;
-                    }
-                }
-            }
-        );
-    }
 
     // Filter for filtering clothing by category.
     filterExact(property: string, rule: any) {
@@ -185,7 +173,7 @@ export class ListComponent implements OnInit {
         this.filteredClothes = this.closet;
         this.filteredTags = _.cloneDeep(this.tagsArray);
         this.filteredColors = _.cloneDeep(this.colorsBooleans);
-
+        this.selectedColors = [];
         this.resetRadioButtons();
     }
 
@@ -196,17 +184,30 @@ export class ListComponent implements OnInit {
         if (index >= 0) {
             this.filteredTags.splice(index, 1);
         }
-
-        this.applyTagFilters(tag);
+        this.applyTagFilters();
     }
 
     selectColor(color: string): void {
+
         for (const items of this.filteredColors) {
             if (items.name === color) {
-                items.selected = true;
-            }
+                items.selected = true; }
         }
-        this.applyColorFilters(color);
+
+        this.selectedColors.push(color);
+
+        const tempArray = _.cloneDeep(this.selectedColors);
+
+        this.filteredClothes = this.closet.filter(
+            function(i){
+                for (const itemsColors of i.colors) { 
+                    for (const selectCol of tempArray) {
+                        if (selectCol === itemsColors) {
+                            return i;
+                        }
+                    }
+                }
+            });
     }
 
     goToEdit(currentClothing: ClothingItem) {

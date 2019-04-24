@@ -26,8 +26,8 @@
     <mat-divider></mat-divider>
 
     <div class="colorList">
-        <mat-chip-list #chipList>
-            <mat-chip *ngFor="let color of filteredColors" [selectable]="selectable" (select)="selectable"
+        <mat-chip-list #chipList [multiple]="true" [selectable]="true">
+            <mat-chip *ngFor="let color of filteredColors" [selected]="color.selected"
                 (click)="selectColor(color.name)"> {{ color.name }}
             </mat-chip>
         </mat-chip-list>
@@ -92,7 +92,7 @@
     <!-- Ends iterating through clothing in cards -->
 
     <div class="empty-container">
-            <img *ngIf="isLoaded && closet.length==0" src="../../../assets/empty-closet.png" class="empty-text">
+        <img *ngIf="isLoaded && closet.length==0" src="../../../assets/empty-closet.png" class="empty-text">
     </div>
 
 </div>
